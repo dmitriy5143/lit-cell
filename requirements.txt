@@ -1,0 +1,8 @@
+numpy
+pandas
+scipy
+matplotlib
+scikit-learn
+torch
+torch-geometric
+tabulate

@@ -1,0 +1,4 @@
+variant,rmse,gain,cosine
+Full velocity-rich MP,20.6392,2.94,0.173
+No-velocity MP,20.4821,3.68,0.198
+Radial/crowding MP,20.4338,3.91,0.212
