@@ -22,6 +22,9 @@ The physical prior is treated as a weak structural channel/control, not as a sta
 
 ## Repository Structure
 
+- `REPRODUCIBILITY.md` - exact environment, data contract and defense-run protocol.
+- `scripts/reproduce_defense_runs.sh` - three-seed MDCK Bulk/Edge commands used for the reported radial message-passing comparison.
+- `scripts/validate_lachance_tables.py` - input-table schema and duplicate/missing-value validation.
 - `scripts/run_lachance_architecture_study.py` - LaChance data loading, movie split, self-flow/proposal backbone and shared training utilities.
 - `scripts/run_lachance_nextgen_message_passing.py` - route/state-aware graph/message-passing variants.
 - `scripts/run_lachance_candidate_oracle.py` - causal candidate generation and oracle coverage diagnostics.
@@ -51,10 +54,13 @@ $TABLE_ROOT/
 ## Installation
 
 ```bash
-python3 -m venv .venv
+python3.11 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+Exact environment, input schema and defense-run commands are documented in
+[`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
 
 ## Quick Smoke Runs
 
