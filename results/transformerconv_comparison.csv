@@ -1,7 +1,0 @@
-dataset,model,rmse_px,rmse_std,r2_vec,gain_vs_self_flow_pct,positive_seed_fraction,notes
-MDCK Edge,Self + flow,20.8864,0.0,0.4725,0.0,0.0,strong neural baseline: GRU self + learned coarse flow
-MDCK Edge,TransformerConv social,21.57301099623008,0.5955256647190154,0.43694454213527223,-3.350567776170658,0.3333333333333333,generic PyG TransformerConv replaces structured social decoder
-MDCK Edge,3-layer radial MP,19.9183,0.0,0.5203,4.63,1.0,ours: constrained radial/crowding message passing
-MDCK Bulk,Self + flow,21.6278,0.0,0.5246,0.0,0.0,strong neural baseline: GRU self + learned coarse flow
-MDCK Bulk,TransformerConv social,20.31918777451219,0.1303319894460482,0.5803901166435774,6.050658253947172,1.0,generic PyG TransformerConv replaces structured social decoder
-MDCK Bulk,3-layer radial MP,20.1205,0.0,0.5886,6.97,1.0,ours: constrained radial/crowding message passing

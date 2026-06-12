@@ -1,41 +1,54 @@
-# Interpretable Graph Model for Collective Cell Migration
+# Route-State Candidate Forecasting for Collective Cell Migration
 
-This repository snapshot contains the code and result tables for the project defense:
+This repository is the clean code snapshot for the project defense:
 
-**Regime-gated radial/crowding message passing for displacement forecasting in collective cell migration.**
+**Interpretable GNN for collective cell migration with route/state-aware backbone and calibrated candidate-energy head.**
 
-The main scientific question is whether local neighbours carry an ablatable predictive signal beyond a cell's own trajectory and a coarse local tissue flow.
+The repository intentionally contains code and instructions only. Raw trajectory tables, generated CSV results, plots and checkpoints are not committed.
+
+## Research Question
+
+Can local cell neighbours provide a stable, interpretable predictive signal for displacement forecasting, and can a model select a plausible future trajectory region without using the true future at inference time?
+
+The final project architecture is **Route-State Candidate Forecasting (RSCF)**:
+
+1. Encode cell history and local route/state graph.
+2. Produce a strong causal backbone proposal.
+3. Generate a candidate cloud of possible future displacements.
+4. Score candidates with a calibrated candidate-energy head.
+5. Predict a bounded residual mixture over the candidate region.
+
+The physical prior is treated as a weak structural channel/control, not as a standalone future-configuration score.
 
 ## Repository Structure
 
-- `src/oz_core.py` - shared graph tensors, temporal encoder, flow encoder, metrics, normalization and legacy structural decoder utilities.
-- `src/data_protocol.py` - LaChance table loading, causal sample construction, movie split and dataset preparation.
-- `src/train_radial_mp.py` - current best radial/crowding message-passing branch.
-- `src/train_transformerconv.py` - generic PyG TransformerConv social-branch baseline.
-- `src/run_baselines.py` - classical baselines: zero displacement, constant velocity, Ridge and MLP.
-- `results/` - compact CSV tables used in the project artifacts.
-- `figures/` - key defense figures.
+- `scripts/run_lachance_architecture_study.py` - LaChance data loading, movie split, self-flow/proposal backbone and shared training utilities.
+- `scripts/run_lachance_nextgen_message_passing.py` - route/state-aware graph/message-passing variants.
+- `scripts/run_lachance_candidate_oracle.py` - causal candidate generation and oracle coverage diagnostics.
+- `scripts/run_lachance_oracle_signal_sweep.py` - fast candidate-energy scorer/aggregator sweep.
+- `scripts/run_lachance_transition_critic_v2.py` - offline learned transition critic with controls.
+- `scripts/run_oz_full_architecture_study.py` and helper scripts - legacy/shared utilities used by the LaChance runners.
+- `src/` - compact earlier baseline/backbone utilities kept for reference.
 
-Large raw trajectory tables are not included in this snapshot. Use `--table-root` to point scripts to the local LaChance tables.
+## Data
 
-## Main Results
+Large raw tables are not included. Pass the local LaChance table directory explicitly:
 
-Held-out movie protocol, horizon 6 frames:
+```bash
+TABLE_ROOT=/path/to/lachance_epithelia/tables
+```
 
-| Dataset | Self+flow RMSE | TransformerConv social RMSE | 3-layer radial MP RMSE |
-|---|---:|---:|---:|
-| MDCK Edge | 20.8864 | 21.5730 | 19.9183 |
-| MDCK Bulk | 21.6278 | 20.3192 | 20.1205 |
+Expected structure:
 
-Interpretation:
+```text
+$TABLE_ROOT/
+  MDCK_Bulk/*.csv
+  MDCK_Edge/*.csv
+  MDAMB231/*.csv
+  HUVEC/*.csv
+```
 
-- `self + flow` is the strong neural baseline.
-- `TransformerConv social` tests whether a generic graph attention layer can replace the structured decoder.
-- `3-layer radial MP` is the final model: constrained radial/crowding message passing.
-
-## Reproducing Key Runs
-
-Install dependencies:
+## Installation
 
 ```bash
 python3 -m venv .venv
@@ -43,81 +56,100 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Set the local data path:
+## Quick Smoke Runs
+
+Candidate oracle gate:
 
 ```bash
-TABLE_ROOT=/path/to/lachance_epithelia/tables
-```
-
-Run the current best model:
-
-```bash
-python src/train_radial_mp.py \
-  --cell-types MDCK_Edge MDCK_Bulk \
+python scripts/run_lachance_candidate_oracle.py \
   --table-root "$TABLE_ROOT" \
-  --out-dir outputs/radial_mp_mdck \
-  --split-mode movie \
-  --split-seed 20260608 \
-  --max-movies 8 \
-  --crop-fraction 0.08 \
-  --r-cut-px 50 \
+  --out-dir outputs/candidate_oracle_smoke \
+  --cell-types MDCK_Edge \
   --horizon 6 \
-  --seeds 7 42 123 \
-  --k 10 \
-  --temporal-epochs 35 \
-  --flow-epochs 25 \
-  --mp-epochs 110 \
-  --sequence-balanced-loss \
-  --layers 3 \
-  --hidden-dim 72 \
-  --edge-hidden-dim 56 \
-  --max-delta-norm 1.2 \
-  --lr 8e-4 \
-  --social-l2 2e-4 \
-  --flow-gate-l2 0.05
+  --seeds 42 \
+  --max-movies 8 \
+  --sobol-count 8 \
+  --gaussian-count 8 \
+  --train-reranker \
+  --reranker-train-nodes 5000 \
+  --reranker-val-nodes 2000
 ```
 
-Run TransformerConv social baseline:
+Oracle-signal sweep:
 
 ```bash
-python src/train_transformerconv.py \
-  --cell-types MDCK_Edge MDCK_Bulk \
+python scripts/run_lachance_oracle_signal_sweep.py \
   --table-root "$TABLE_ROOT" \
-  --out-dir outputs/transformerconv_mdck \
-  --split-mode movie \
-  --split-seed 20260608 \
-  --max-movies 8 \
-  --crop-fraction 0.08 \
-  --r-cut-px 50 \
-  --horizon 6 \
-  --seeds 7 42 123 \
-  --k 10 \
-  --temporal-epochs 35 \
-  --flow-epochs 25 \
-  --transformer-epochs 110 \
-  --sequence-balanced-loss \
-  --layers 3 \
-  --hidden-dim 72 \
-  --heads 4 \
-  --lr 8e-4 \
-  --social-l2 2e-4 \
-  --flow-gate-l2 0.05
+  --out-dir outputs/oracle_signal_sweep_smoke \
+  --cell-types MDCK_Edge \
+  --horizons 6 \
+  --seeds 42 \
+  --methods ridge_error,ridge_error_soft_blend \
+  --feature-sets full,no_physics,dynamic_only
 ```
 
-Run classical baselines:
+Transition critic v2:
 
 ```bash
-python src/run_baselines.py
+python scripts/run_lachance_transition_critic_v2.py \
+  --table-root "$TABLE_ROOT" \
+  --out-dir outputs/critic_v2_smoke \
+  --cell-types MDCK_Bulk,MDCK_Edge \
+  --horizons 6,4 \
+  --seeds 42 \
+  --critic-v2-model mlp \
+  --critic-v2-feature-set full,no_physics,dynamic_only,oz_only,shuffled_state,time_shuffled
 ```
+
+## Main Experimental Protocol
+
+Primary datasets:
+
+- `MDCK_Bulk`
+- `MDCK_Edge`
+
+Guard datasets:
+
+- `MDAMB231`
+- `HUVEC`
+
+Recommended settings:
+
+```bash
+python scripts/run_lachance_oracle_signal_sweep.py \
+  --table-root "$TABLE_ROOT" \
+  --out-dir outputs/oracle_signal_sweep_mdck_h4h6 \
+  --cell-types MDCK_Bulk,MDCK_Edge \
+  --horizons 6,4 \
+  --seeds 7,42,123
+```
+
+For physics/critic controls:
+
+```bash
+python scripts/run_lachance_transition_critic_v2.py \
+  --table-root "$TABLE_ROOT" \
+  --out-dir outputs/critic_v2_mdck_guard \
+  --cell-types MDCK_Bulk,MDCK_Edge,MDAMB231,HUVEC \
+  --horizons 6,4 \
+  --seeds 7,42,123
+```
+
+## Methodological Notes
+
+- The primary split is by movie, not by frame.
+- True future is used only in training losses and evaluation/oracle diagnostics.
+- Candidate oracle is not a deployable model; it measures whether good future candidates exist.
+- Static OZ/Henderson-style `c(r)` is included as a weak structural channel/control.
+- The reportable architecture is the deployable path: backbone proposal + candidate cloud + calibrated candidate-energy selector.
 
 ## Defense Claim
 
-The project does not claim full SOTA over all published LaChance protocols. The supported claim is:
+The project does not claim a final SOTA result over all published protocols. The supported claim is:
 
-> On held-out MDCK displacement forecasting, a constrained radial/crowding graph decoder improves a strong self+flow neural baseline and is more stable/interpretable than a generic TransformerConv social branch.
+> RSCF provides a reproducible and interpretable forecasting pipeline that separates neighbour encoding, candidate generation and causal candidate selection. On MDCK Bulk/Edge it shows deployable improvement over the backbone proposal and reveals a large oracle ceiling for future selector development.
 
 ## Team
 
 - Dmitry Stanislavchuk-Abovsky - research question, implementation, experiments, diagnostics and artifact preparation.
-- Andrey P. Zakharov - scientific supervision, methodology and feedback.
-
+- Andrey P. Zakharov - scientific supervision, methodology and expert feedback.

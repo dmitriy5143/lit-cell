@@ -3,6 +3,6 @@ pandas
 scipy
 matplotlib
 scikit-learn
+tabulate
 torch
 torch-geometric
-tabulate
