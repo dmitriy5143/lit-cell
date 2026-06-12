@@ -143,11 +143,11 @@ python scripts/run_lachance_transition_critic_v2.py \
 - Static OZ/Henderson-style `c(r)` is included as a weak structural channel/control.
 - The reportable architecture is the deployable path: backbone proposal + candidate cloud + calibrated candidate-energy selector.
 
-## Defense Claim
+## Defense Positioning
 
-The project does not claim a final SOTA result over all published protocols. The supported claim is:
+RSCF is positioned as a reproducible and interpretable forecasting pipeline for collective-cell displacement prediction:
 
-> RSCF provides a reproducible and interpretable forecasting pipeline that separates neighbour encoding, candidate generation and causal candidate selection. On MDCK Bulk/Edge it shows deployable improvement over the backbone proposal and reveals a large oracle ceiling for future selector development.
+> The method separates neighbour encoding, candidate generation and causal candidate selection. On MDCK Bulk/Edge it improves over the backbone proposal, exposes a large oracle ceiling, and provides ablation/control hooks for further scaling toward stronger selector and context-aware models.
 
 ## Team
 
