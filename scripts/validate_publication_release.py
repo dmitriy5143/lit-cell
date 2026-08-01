@@ -8,6 +8,7 @@ import hashlib
 import json
 import math
 import re
+import tomllib
 from pathlib import Path
 
 import pandas as pd
@@ -188,9 +189,42 @@ def validate_manuscript(checks: list[str]) -> None:
 
 def validate_features_and_figures(checks: list[str]) -> None:
     dictionary = pd.read_csv(EVIDENCE / "raw_context_v2_source_dictionary.csv")
-    require(len(dictionary) == 1093, "source feature dictionary has 1,093 columns", checks)
+    contract = json.loads((EVIDENCE / "raw_context_v2_feature_contract.json").read_text(encoding="utf-8"))
+    require(len(dictionary) == 1019, "source feature dictionary has the exact 1,019 final columns", checks)
     require(dictionary["column"].is_unique, "source feature dictionary columns are unique", checks)
+    require(
+        dictionary["source_order"].astype(int).tolist() == list(range(len(dictionary))),
+        "source feature dictionary preserves exact final column order",
+        checks,
+    )
     require(not dictionary["family"].eq("other").any(), "all source columns have a declared family", checks)
+    columns = dictionary["column"].astype(str).tolist()
+    schema_digest = hashlib.sha256("\0".join(columns).encode("utf-8")).hexdigest()
+    require(contract["column_count"] == len(columns), "feature contract column count matches dictionary", checks)
+    require(
+        contract["column_schema_sha256"] == schema_digest,
+        "feature contract ordered-schema digest matches dictionary",
+        checks,
+    )
+    family_counts = dictionary.groupby("family").size().astype(int).to_dict()
+    require(contract["family_counts"] == family_counts, "feature contract family counts match dictionary", checks)
+    require(contract["row_count"] == 93596, "feature contract records 93,596 final rows", checks)
+    require(contract["csv_sha256"] == "45f4b1db7949fd7fa6f791db27e7d8af6999ae7a9c0ece810fb54f1ad325de48", "feature contract records the frozen CSV digest", checks)
+    expected_stages = {
+        "tracking_index": (95549, 7),
+        "multiscale_image": (95549, 151),
+        "tissue_flow": (93596, 255),
+        "combined": (93596, 400),
+        "observability": (93596, 618),
+        "raw_context_v2": (93596, 1019),
+    }
+    require(set(contract["stage_artifacts"]) == set(expected_stages), "feature contract covers all six preparation stages", checks)
+    for stage, (rows, columns) in expected_stages.items():
+        artifact = contract["stage_artifacts"][stage]
+        require((artifact["rows"], artifact["columns"]) == (rows, columns), f"feature stage dimensions match: {stage}", checks)
+        require(len(artifact["sha256"]) == 64, f"feature stage SHA-256 is registered: {stage}", checks)
+    require(contract["raw_source"]["zenodo_record"] == 4959169, "raw feature source is frozen to Zenodo 4959169", checks)
+    require(contract["raw_source"]["sequence_stacks"] == 6, "raw feature source declares six movie stacks", checks)
 
     ledger = pd.read_csv(EVIDENCE / "architecture_search_ledger.csv")
     require(len(ledger) >= 15, "architecture search ledger covers at least 15 branches", checks)
@@ -219,8 +253,40 @@ def validate_code_layout(checks: list[str]) -> None:
             require(depth == "2", f"portable repository root in {runner.name}", checks)
     require((ROOT / "src" / "lit_cell_forecasting" / "streaming_forecaster.py").is_file(), "reusable LIT-Cell forecasting package is present", checks)
     require((ROOT / "scripts" / "reproduce_lit_cell.py").is_file(), "single LIT-Cell reproduction entry point is present", checks)
+    require((ROOT / "scripts" / "prepare_lit_cell_features.py").is_file(), "raw-to-feature LIT-Cell preparation entry point is present", checks)
     require((ROOT / "experiments" / "publication" / "run_lachance_online_lomo_benchmark_v102.py").is_file(), "outer-movie orchestration runner is present", checks)
+    feature_modules = {
+        "run_lachance_image_feature_extraction.py",
+        "run_lachance_multiscale_image_feature_probe.py",
+        "run_lachance_tissue_flow_feature_probe.py",
+        "run_lachance_feature_reconnaissance.py",
+        "build_lachance_observability_feature_grid.py",
+        "build_lachance_raw_context_v2_grid.py",
+    }
+    require(
+        all((ROOT / "experiments" / "publication" / name).is_file() for name in feature_modules),
+        "raw-to-feature publication dependency closure is present",
+        checks,
+    )
     require((ROOT / "docs" / "NAMING.md").is_file(), "canonical project identity is documented", checks)
+
+
+def validate_identity(checks: list[str]) -> None:
+    canonical_name = "LIT-Cell: Local Innovation Transport for Cell Motion"
+    repository = "https://github.com/dmitriy5143/lit-cell"
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    naming = (ROOT / "docs" / "NAMING.md").read_text(encoding="utf-8")
+    citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    normalized_readme = re.sub(r"\s+", " ", readme)
+    normalized_naming = re.sub(r"\s+", " ", naming)
+    normalized_citation = re.sub(r"\s+", " ", citation)
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    require(canonical_name in normalized_readme, "README uses the canonical LIT-Cell title", checks)
+    require(canonical_name in normalized_naming, "naming contract uses the canonical LIT-Cell title", checks)
+    require(canonical_name in normalized_citation, "citation metadata uses the canonical LIT-Cell title", checks)
+    require(repository in naming and repository in citation, "public identity surfaces use the canonical repository URL", checks)
+    require(project["project"]["name"] == "lit-cell-forecasting", "Python distribution uses the canonical LIT-Cell name", checks)
+    require(project["project"]["urls"]["Repository"] == repository, "package metadata uses the canonical repository URL", checks)
 
 
 def main() -> None:
@@ -237,6 +303,7 @@ def main() -> None:
     validate_manuscript(checks)
     validate_features_and_figures(checks)
     validate_code_layout(checks)
+    validate_identity(checks)
     payload = {"status": "PASS", "checks": len(checks), "details": checks}
     REPORT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"PASS: {len(checks)} checks")

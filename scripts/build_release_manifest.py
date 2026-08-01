@@ -28,22 +28,37 @@ def sha256(path: Path) -> str:
 
 
 def selected_files() -> list[Path]:
-    roots = [
+    directories = [
         ROOT / "evidence",
         ROOT / "docs",
         ROOT / "src" / "lit_cell_forecasting",
         ROOT / "experiments" / "publication",
         ROOT / "manuscript",
         ROOT / "output" / "pdf",
+        ROOT / "scripts",
+        ROOT / "tests",
     ]
     files: list[Path] = []
-    for directory in roots:
+    for directory in directories:
         for path in directory.rglob("*"):
             if not path.is_file() or path in EXCLUDED:
                 continue
             if "__pycache__" in path.parts or path.suffix in {".pyc", ".aux", ".log", ".out"}:
                 continue
             files.append(path)
+    files.extend(
+        path
+        for path in (
+            ROOT / "README.md",
+            ROOT / "REPRODUCIBILITY.md",
+            ROOT / "CITATION.cff",
+            ROOT / "LICENSE",
+            ROOT / "pyproject.toml",
+            ROOT / "requirements.txt",
+            ROOT / "requirements-vision.txt",
+        )
+        if path.is_file()
+    )
     return sorted(files)
 
 

@@ -1,6 +1,22 @@
 {
   "algorithm": "sha256",
   "files": {
+    "CITATION.cff": {
+      "bytes": 642,
+      "sha256": "cb47d2493578da0bf66e983072923d450462d6ce88a8b510527bf2c1b9c91162"
+    },
+    "LICENSE": {
+      "bytes": 164,
+      "sha256": "207c01d985c9967ba166e7d4a3a98a174833ad78a9432628094069b348c90228"
+    },
+    "README.md": {
+      "bytes": 5384,
+      "sha256": "a6dcb4e710d5d90ec286286fa4989c46655957e3c2e3c61e4d46c3bd24c1e6b1"
+    },
+    "REPRODUCIBILITY.md": {
+      "bytes": 11485,
+      "sha256": "55541b634590df6fd2ec2f4d487187754e491f7388e12c579f3a4b74685f2657"
+    },
     "docs/ARCHITECTURE.md": {
       "bytes": 4021,
       "sha256": "93cb99aae59354e1654707770c37880f80dfd3b7a673ead14671343081b9571f"
@@ -14,16 +30,16 @@
       "sha256": "faba32ddae964aeb18488d2afa114e8766412205c11749165115c7017652e612"
     },
     "docs/EXPERIMENTS.md": {
-      "bytes": 4244,
-      "sha256": "4389a139f802ab1c2d542bb9fda38fa94bfb831f4f9952adfcad674bdac317e3"
+      "bytes": 4408,
+      "sha256": "5d90b9b2617f24f05077a47f0d20692e7ac1d309d76e1176a429c619dd952d98"
     },
     "docs/NAMING.md": {
       "bytes": 865,
       "sha256": "0fbba760b55dcfad7d5cc05d47ba9670141146b5c0a4f09c560edb775545df32"
     },
     "evidence/README.md": {
-      "bytes": 1117,
-      "sha256": "ba397125e74930a16afa6165912a9a52fdde3c8fc03f2119aafbed9ea61a7f78"
+      "bytes": 1323,
+      "sha256": "87afe6a13b98e89187f94efe806d95371d347fef65b37a0f5bebb2a37f397ce0"
     },
     "evidence/architecture_search_ledger.csv": {
       "bytes": 5042,
@@ -293,9 +309,13 @@
       "bytes": 8923,
       "sha256": "935fb48c2e23fe5befcea329064553a5576e9ea7bb3ae9e61622881e86bbaf6a"
     },
+    "evidence/raw_context_v2_feature_contract.json": {
+      "bytes": 2879,
+      "sha256": "9c5276f44a85ccb3f2936e13b7c52338936a3da278df146c10e34049aa1a3460"
+    },
     "evidence/raw_context_v2_source_dictionary.csv": {
-      "bytes": 231968,
-      "sha256": "774adc41cdabc81b215265bbc4454b9afbb869597821a882f8be69e0d38953de"
+      "bytes": 215838,
+      "sha256": "87644033028883751fae8ca83893013c7da0e840d637542125c1d40b48373130"
     },
     "evidence/v188/v188_artifact_manifest.json": {
       "bytes": 11916,
@@ -417,6 +437,10 @@
       "bytes": 13281,
       "sha256": "3d615fda83565868ba8648d93676193e3e92d41ee2b33cfce9ae629e247ab94e"
     },
+    "experiments/publication/build_lachance_observability_feature_grid.py": {
+      "bytes": 16108,
+      "sha256": "8d9891ff164fa40968f2ee10e6552c3825dabc7e8fa161f1bdd4076e1fe329f3"
+    },
     "experiments/publication/build_lachance_online_track_anchor_cache_v97.py": {
       "bytes": 10506,
       "sha256": "185bc3463105ea7e14618c32e3a9d8aec65627393fb577998bc1eed87e663fae"
@@ -428,6 +452,10 @@
     "experiments/publication/build_lachance_publication_bundle_v188.py": {
       "bytes": 42966,
       "sha256": "daf2d5efda20cb68de1e24c9af46a106913bb5f9c715b448cd291f8fdb4f5264"
+    },
+    "experiments/publication/build_lachance_raw_context_v2_grid.py": {
+      "bytes": 18064,
+      "sha256": "076679c841b9f1dadc9f458a61699e57f53142f23d72445ccb6608848a4728af"
     },
     "experiments/publication/build_post_v166_protocol_contract_v188.py": {
       "bytes": 14294,
@@ -549,6 +577,10 @@
       "bytes": 23985,
       "sha256": "3eaca7a2ee84dcfb574012b0f4d5c17b9b903cdb1b8940f08d32783ff2990226"
     },
+    "experiments/publication/run_lachance_feature_reconnaissance.py": {
+      "bytes": 18541,
+      "sha256": "5ae693272c73cbc00044bf8a8a01636e07884f20a6d8298d022f8a6fca33343e"
+    },
     "experiments/publication/run_lachance_flow_regime_route_generator_v51.py": {
       "bytes": 46462,
       "sha256": "a134f64e77300a86a6d76b946f1320f809dd04f47c164fa59a79e31907910150"
@@ -589,6 +621,10 @@
       "bytes": 30151,
       "sha256": "2493cf515b1a2ee628e34701dfb39b789302b9caac8806fa816030797d394bf8"
     },
+    "experiments/publication/run_lachance_image_feature_extraction.py": {
+      "bytes": 27270,
+      "sha256": "7753a7ca233c5422e42695dbb49d47308f67f28bfdb44ee6c8c0276c8f9e8782"
+    },
     "experiments/publication/run_lachance_image_feature_probe.py": {
       "bytes": 25954,
       "sha256": "dffdcf34c753488be6d0ebcdc4b294e1d0fa85a3334755d91d166fca8e6ead19"
@@ -613,6 +649,10 @@
       "bytes": 18432,
       "sha256": "ebcebe41114f6e27fbf6766e83caedbeca5b898a20c58d793f198a032d776d67"
     },
+    "experiments/publication/run_lachance_multiscale_image_feature_probe.py": {
+      "bytes": 18898,
+      "sha256": "c21deebe2ddfcabb31eb67b835822a9741d72ab0b86ff222c32edd79472b12b5"
+    },
     "experiments/publication/run_lachance_object_centric_mask_gate.py": {
       "bytes": 12900,
       "sha256": "639941443538f26ebf3d7f493590b16eb6c7c539378b3a3f811a743701ce451a"
@@ -622,8 +662,8 @@
       "sha256": "144d50502434ede2d4bb62d92abb5ddc617d9fe2b7183af41e501ec31d7d01f2"
     },
     "experiments/publication/run_lachance_online_lomo_benchmark_v102.py": {
-      "bytes": 77260,
-      "sha256": "84bc4361b77cd6dac6be2d3b8ed2a7398952038c01f5439d7d6e0b17271d0cc5"
+      "bytes": 79268,
+      "sha256": "ab109deb5056f49aff37150c99bdaf2796644ca8a038d41690391af185f61acf"
     },
     "experiments/publication/run_lachance_online_spatial_innovation_audit_v139.py": {
       "bytes": 13378,
@@ -716,6 +756,10 @@
     "experiments/publication/run_lachance_target_formulation_audit_v2.py": {
       "bytes": 36705,
       "sha256": "8dbdc974936188d905225fe5d7bf2eabdf450a6dc1ee250b676d5291c3f9348e"
+    },
+    "experiments/publication/run_lachance_tissue_flow_feature_probe.py": {
+      "bytes": 30874,
+      "sha256": "0503c336038f40edb2308c4c0eb34a70f7b631d4e9f8b81a78ba346e612ece55"
     },
     "experiments/publication/run_lachance_v102_manifest_jobs.py": {
       "bytes": 3628,
@@ -878,16 +922,104 @@
       "sha256": "4e1677d2a40075b98d23ec11607dc978a2f8733e430f1a5e4bcd2333d37a37a2"
     },
     "manuscript/main_ru.tex": {
-      "bytes": 200515,
-      "sha256": "40cd59d9dd4d085a03cd1dba37c7867d4a421b04b3fae4ab565716ff121f3865"
+      "bytes": 202626,
+      "sha256": "96792efffa92d4dd8d993b1fad528b4511f590897d8226a65c0b7094e92c82a3"
     },
     "manuscript/supplement/supplement_ru.md": {
       "bytes": 68689,
       "sha256": "4519f24c42dd7e2e1b822ca03dc71f391b505cd68018f91f800fbc7e413fba7c"
     },
     "output/pdf/sequential_cell_motion_forecasting_ru.pdf": {
-      "bytes": 714135,
-      "sha256": "a9ff89c18a1b98ec5367457b97e068437a5b2a72978bab6b1bc71653bc0535be"
+      "bytes": 716260,
+      "sha256": "08534ffef192955f1a371d71336e7080f83cacaacc63a3e5571f350fffe083f5"
+    },
+    "pyproject.toml": {
+      "bytes": 777,
+      "sha256": "107ba4c6be82df120ba9d633f3eb01acb776794d2c3c113af602a4f1b9aaa8aa"
+    },
+    "requirements-vision.txt": {
+      "bytes": 56,
+      "sha256": "5e0c216c2472d833136ef297bab4915d1411a4753cf396fad7f1b47042bc1cf4"
+    },
+    "requirements.txt": {
+      "bytes": 248,
+      "sha256": "71318829fb354beb3471e04f900c23c0fe9be409613e8a9714fd75cc32224852"
+    },
+    "scripts/__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "scripts/build_manuscript.py": {
+      "bytes": 2530,
+      "sha256": "ceff2d04ed670ad3aa36d8d3d7bd6fbcebd31258790ad90e09011c8a49d91d3c"
+    },
+    "scripts/build_release_manifest.py": {
+      "bytes": 2436,
+      "sha256": "cdcd6514bd5f04805fa744fed1d1f1cdc033a5e1eae52978c6188070e83168d0"
+    },
+    "scripts/export_feature_dictionary.py": {
+      "bytes": 2921,
+      "sha256": "69744e015c76be60be21eac347aea78680f9b1d5e2ba1ecd7e0d6f84c6f59575"
+    },
+    "scripts/prepare_lit_cell_features.py": {
+      "bytes": 15597,
+      "sha256": "4ec3c04992476f689a8ed5314bbc6351bff2f7c5a54189342842579d3aa7c987"
+    },
+    "scripts/reproduce_defense_runs.sh": {
+      "bytes": 905,
+      "sha256": "e5b149aa587cd669865a3b252933c8119567cb9ec323a4e13f064f61fc982d67"
+    },
+    "scripts/reproduce_lit_cell.py": {
+      "bytes": 11344,
+      "sha256": "cb7b792d5cb0ab3eac7f3a699683ef8dc485e84ff8f3f01e60c471ff9794653f"
+    },
+    "scripts/run_clean_spatial_identifiability_test.py": {
+      "bytes": 60012,
+      "sha256": "1c6eadc1e307856fd87e24a0b47c0c1d5dfed2cc773bfabd4a10b18e51a8a022"
+    },
+    "scripts/run_data_audit_tracklet_baselines.py": {
+      "bytes": 40602,
+      "sha256": "735813ec87cc90419fa11a05c94553d1724f5bc48862959285048d401d727eb2"
+    },
+    "scripts/run_lachance_architecture_study.py": {
+      "bytes": 33802,
+      "sha256": "1d5e2b3ea6a662aae22a9c27f1ee347c649b995eaf1b1ae799c24e2de5a7224d"
+    },
+    "scripts/run_lachance_candidate_oracle.py": {
+      "bytes": 83312,
+      "sha256": "a7ed6e9881308c1291250b5cf49e4c15f6ee831aee2b86ba9778bde13bf9ddff"
+    },
+    "scripts/run_lachance_nextgen_message_passing.py": {
+      "bytes": 56817,
+      "sha256": "3fec910eddeb219548ec1636d3841236c91186b52a6bea5b3a613d30c2d7fa44"
+    },
+    "scripts/run_lachance_oracle_signal_sweep.py": {
+      "bytes": 81945,
+      "sha256": "ce5de80557d4a36ef7ed7044cc6340a07762ba1f96f3c4554fa25a80055853d2"
+    },
+    "scripts/run_lachance_transition_critic_v2.py": {
+      "bytes": 73305,
+      "sha256": "e516d6d97bb196dd76d9356232163cf41b3c237f0b0757dfd93a0dc24fd6f26c"
+    },
+    "scripts/run_oz_full_architecture_study.py": {
+      "bytes": 71288,
+      "sha256": "f046d05198c8a0b2247d637c22d7de091eab8ef88c0b45b4e9850b49e510e3fe"
+    },
+    "scripts/run_sequential_cell_forecasting.py": {
+      "bytes": 2792,
+      "sha256": "c778cc1a67c95198d1ed05857abc64a9508372eed623b057109137ed754fa837"
+    },
+    "scripts/validate_lachance_tables.py": {
+      "bytes": 1953,
+      "sha256": "9ab09b1d1f8304b634705d89f7d917f0519b597109fdae373eedb9db97956ebd"
+    },
+    "scripts/validate_manuscript_pdf.py": {
+      "bytes": 5559,
+      "sha256": "dc209d20db2fd374d45e24f0711302cfc3a0c552c27579a41fab8a94a68e876b"
+    },
+    "scripts/validate_publication_release.py": {
+      "bytes": 16705,
+      "sha256": "46aa8344184ac32edc063197cd37f5837deb9bdf68a710fccd402227db7d19ce"
     },
     "src/lit_cell_forecasting/__init__.py": {
       "bytes": 659,
@@ -932,6 +1064,14 @@
     "src/lit_cell_forecasting/student_t_prior.py": {
       "bytes": 970,
       "sha256": "e5622b0ffbff5563961140ed0ce4c9a1994ddb894d648783dda4e0365a94c6fd"
+    },
+    "tests/test_operators.py": {
+      "bytes": 2849,
+      "sha256": "676842d470387a9147ca7532467242004a1ff994d37f9dd2da4fdf5721326db2"
+    },
+    "tests/test_protocol.py": {
+      "bytes": 4097,
+      "sha256": "167c2dfd4aceae18959c9fcf5a6b527f3fcd4ffc54dbad920f405627f2825dbb"
     }
   },
   "schema": "publication_release_manifest_v1"
