@@ -1,6 +1,7 @@
 .DS_Store
 __pycache__/
 *.py[cod]
+*.egg-info/
 .venv/
 venv/
 outputs/
@@ -10,3 +11,7 @@ new_data/
 *.pth
 *.ckpt
 *.log
+/tmp/
+/output/pdf/main_ru.*
+/evidence/publication_release_validation.json
+/evidence/manuscript_pdf_validation.json

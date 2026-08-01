@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airi-cell-forecasting"
+version = "0.1.0"
+description = "Causal sequential cell-motion forecasting with local innovation transport"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Dmitry Stanislavchuk-Abovsky"},
+  {name = "Andrey P. Zakharov"},
+]
+dependencies = [
+  "numpy>=2.0,<3",
+  "pandas>=2.2,<3",
+  "scipy>=1.17,<2",
+  "torch>=2.8,<3",
+  "torch-geometric>=2.7,<3",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["airi_forecasting*"]
