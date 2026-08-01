@@ -1,161 +1,109 @@
-# Route-State Candidate Forecasting for Collective Cell Migration
+# Sequential Cell-Motion Forecasting with Local Innovation Transport
 
-This repository is the clean code snapshot for the project defense:
+This repository contains the method, experiment runners, frozen evidence, and
+Russian-language manuscript for causal online forecasting of collective cell
+motion. A prediction for transition `t -> t+1` is committed before frame
+`t+1` is observed. Once that transition is complete, its innovation and the
+completed innovations of nearby cells may update the next forecast.
 
-**Interpretable GNN for collective cell migration with route/state-aware backbone and calibrated candidate-energy head.**
+The reportable model has four parts:
 
-The repository intentionally contains code and instructions only. Raw trajectory tables, generated CSV results, plots and checkpoints are not committed.
+1. a coordinate and velocity anchor with a bank of residual trajectory experts;
+2. a recurrent causal state filter with a Student-t next-step distribution;
+3. a bounded multiscale graph transport of completed neighbour innovations;
+4. fold-external uncertainty calibration and a sparse deployment equivalent.
 
-## Research Question
+The graph is therefore neither a future-looking interaction prior nor an
+unconstrained correction. It transfers only errors of transitions that were
+fully observed before the next prediction was issued.
 
-Can local cell neighbours provide a stable, interpretable predictive signal for displacement forecasting, and can a model select a plausible future trajectory region without using the true future at inference time?
+## Main Results
 
-The final project architecture is **Route-State Candidate Forecasting (RSCF)**:
+All values below use movie-level outer evaluation and the streaming/receding-h1
+protocol described in the manuscript.
 
-1. Encode cell history and local route/state graph.
-2. Produce a strong causal backbone proposal.
-3. Generate a candidate cloud of possible future displacements.
-4. Score candidates with a calibrated candidate-energy head.
-5. Predict a bounded residual mixture over the candidate region.
+| Evaluation | Operating point | h1 RMSE | h6 RMSE | h6 R2 | Main comparison |
+|---|---|---:|---:|---:|---|
+| MDCK Bulk movies 1-6 | strict h1 | 3.474 px | 6.785 px | 0.905 | 13.28% h6 gain over no-update |
+| MDCK Bulk movies 1-6 | cumulative h6 | 3.808 px | 5.501 px | 0.938 | 29.76% h6 gain over no-update |
+| MDCK Bulk movies 10-16 | frozen confirmation | 3.721 px | 4.820 px | 0.952 | 25.82% h6 gain, 7/7 movies |
+| HUVEC | nested movie exclusion | - | 1.440 px | 0.973 | 11.02% h6 gain, 18/18 movies |
+| MDCK Edge | frozen transport kernel | - | 5.261 px | 0.952 | 14.71% h6 gain, 3/3 seeds |
+| MDA-MB-231 | nested movie exclusion | - | 31.337 px | 0.024 | 6.33% h6 gain, 17/17 movies |
 
-The physical prior is treated as a weak structural channel/control, not as a standalone future-configuration score.
+The method has the lowest h6 RMSE among the completed, protocol-matched
+comparators in this study. We do **not** claim a global state of the art across
+trajectory-forecasting tasks: no established benchmark uses the same cell data,
+online observation schedule, split unit, and metric.
 
-## Repository Structure
+## Repository Map
 
-- `REPRODUCIBILITY.md` - exact environment, data contract and defense-run protocol.
-- `scripts/reproduce_defense_runs.sh` - three-seed MDCK Bulk/Edge commands used for the reported radial message-passing comparison.
-- `scripts/validate_lachance_tables.py` - input-table schema and duplicate/missing-value validation.
-- `scripts/run_lachance_architecture_study.py` - LaChance data loading, movie split, self-flow/proposal backbone and shared training utilities.
-- `scripts/run_lachance_nextgen_message_passing.py` - route/state-aware graph/message-passing variants.
-- `scripts/run_lachance_candidate_oracle.py` - causal candidate generation and oracle coverage diagnostics.
-- `scripts/run_lachance_oracle_signal_sweep.py` - fast candidate-energy scorer/aggregator sweep.
-- `scripts/run_lachance_transition_critic_v2.py` - offline learned transition critic with controls.
-- `scripts/run_oz_full_architecture_study.py` and helper scripts - legacy/shared utilities used by the LaChance runners.
-- `src/` - compact earlier baseline/backbone utilities kept for reference.
+- `src/airi_forecasting/`: compact reusable operators for state filtering,
+  bounded transport, sparse neighbourhoods, and equivariant field laws.
+- `experiments/publication/`: exact publication runners and their dependency
+  closure. Historical numeric suffixes are mapped to scientific roles in
+  `docs/EXPERIMENTS.md`.
+- `experiments/history/`: index of rejected or diagnostic architecture branches.
+- `evidence/`: frozen result tables, protocol contracts, control outcomes, and
+  claim-scope ledgers. Raw microscopy data and checkpoints are not committed.
+- `manuscript/`: LaTeX source, supplementary material, figure builders, and
+  publication figures.
+- `output/pdf/`: rendered manuscript after publication quality assurance.
+- `scripts/run_sequential_cell_forecasting.py`: descriptive dispatcher for the
+  principal publication workflows.
 
-## Data
+## Fast Verification
 
-Large raw tables are not included. Pass the local LaChance table directory explicitly:
-
-```bash
-TABLE_ROOT=/path/to/lachance_epithelia/tables
-```
-
-Expected structure:
-
-```text
-$TABLE_ROOT/
-  MDCK_Bulk/*.csv
-  MDCK_Edge/*.csv
-  MDAMB231/*.csv
-  HUVEC/*.csv
-```
-
-## Installation
+Create an environment with Python 3.11 and install the pinned dependencies:
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -e . --no-deps
 ```
 
-Exact environment, input schema and defense-run commands are documented in
+Validate the frozen evidence and manuscript claims without the raw data:
+
+```bash
+python scripts/validate_publication_release.py
+```
+
+Compile all experiment entry points:
+
+```bash
+python -m compileall -q src experiments scripts
+python -m unittest discover -s tests -v
+```
+
+List the principal workflows:
+
+```bash
+python scripts/run_sequential_cell_forecasting.py --list
+```
+
+Data acquisition, exact commands, and the distinction between reproduced,
+frozen, and exploratory evidence are documented in
 [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
 
-## Quick Smoke Runs
+## Scientific Scope
 
-Candidate oracle gate:
+The strongest supported conclusion is that recently completed residual motion
+contains a causal, spatially local, identity-specific signal that improves
+cumulative online cell-motion forecasts. The effective field admits a compact
+E(2)-equivariant and approximately dissipative representation, but the fitted
+functional is not identified as physical energy, traction, or stress. Visual,
+segmentation, and direct mechanics branches were retained only when they passed
+wrong-cell and time-shuffle controls; none improved the conditional mean of the
+final LaChance model.
 
-```bash
-python scripts/run_lachance_candidate_oracle.py \
-  --table-root "$TABLE_ROOT" \
-  --out-dir outputs/candidate_oracle_smoke \
-  --cell-types MDCK_Edge \
-  --horizon 6 \
-  --seeds 42 \
-  --max-movies 8 \
-  --sobol-count 8 \
-  --gaussian-count 8 \
-  --train-reranker \
-  --reranker-train-nodes 5000 \
-  --reranker-val-nodes 2000
-```
+See [`docs/CLAIM_SCOPE.md`](docs/CLAIM_SCOPE.md) before quoting results.
 
-Oracle-signal sweep:
+## Authors and License
 
-```bash
-python scripts/run_lachance_oracle_signal_sweep.py \
-  --table-root "$TABLE_ROOT" \
-  --out-dir outputs/oracle_signal_sweep_smoke \
-  --cell-types MDCK_Edge \
-  --horizons 6 \
-  --seeds 42 \
-  --methods ridge_error,ridge_error_soft_blend \
-  --feature-sets full,no_physics,dynamic_only
-```
+- Dmitry Stanislavchuk-Abovsky: research design, implementation, experiments,
+  diagnostics, and artifact preparation.
+- Andrey P. Zakharov: scientific supervision, methodology, and expert feedback.
 
-Transition critic v2:
-
-```bash
-python scripts/run_lachance_transition_critic_v2.py \
-  --table-root "$TABLE_ROOT" \
-  --out-dir outputs/critic_v2_smoke \
-  --cell-types MDCK_Bulk,MDCK_Edge \
-  --horizons 6,4 \
-  --seeds 42 \
-  --critic-v2-model mlp \
-  --critic-v2-feature-set full,no_physics,dynamic_only,oz_only,shuffled_state,time_shuffled
-```
-
-## Main Experimental Protocol
-
-Primary datasets:
-
-- `MDCK_Bulk`
-- `MDCK_Edge`
-
-Guard datasets:
-
-- `MDAMB231`
-- `HUVEC`
-
-Recommended settings:
-
-```bash
-python scripts/run_lachance_oracle_signal_sweep.py \
-  --table-root "$TABLE_ROOT" \
-  --out-dir outputs/oracle_signal_sweep_mdck_h4h6 \
-  --cell-types MDCK_Bulk,MDCK_Edge \
-  --horizons 6,4 \
-  --seeds 7,42,123
-```
-
-For physics/critic controls:
-
-```bash
-python scripts/run_lachance_transition_critic_v2.py \
-  --table-root "$TABLE_ROOT" \
-  --out-dir outputs/critic_v2_mdck_guard \
-  --cell-types MDCK_Bulk,MDCK_Edge,MDAMB231,HUVEC \
-  --horizons 6,4 \
-  --seeds 7,42,123
-```
-
-## Methodological Notes
-
-- The primary split is by movie, not by frame.
-- True future is used only in training losses and evaluation/oracle diagnostics.
-- Candidate oracle is not a deployable model; it measures whether good future candidates exist.
-- Static OZ/Henderson-style `c(r)` is included as a weak structural channel/control.
-- The reportable architecture is the deployable path: backbone proposal + candidate cloud + calibrated candidate-energy selector.
-
-## Defense Positioning
-
-RSCF is positioned as a reproducible and interpretable forecasting pipeline for collective-cell displacement prediction:
-
-> The method separates neighbour encoding, candidate generation and causal candidate selection. On MDCK Bulk/Edge it improves over the backbone proposal, exposes a large oracle ceiling, and provides ablation/control hooks for further scaling toward stronger selector and context-aware models.
-
-## Team
-
-- Dmitry Stanislavchuk-Abovsky - research question, implementation, experiments, diagnostics and artifact preparation.
-- Andrey P. Zakharov - scientific supervision, methodology and expert feedback.
+The repository license is defined in [`LICENSE`](LICENSE).
