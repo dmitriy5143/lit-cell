@@ -1,0 +1,5 @@
+source_id,role,status,completed_units,expected_units,headline_eligible
+v117_matched_baselines,"classical, robust, tree and GRU comparators",complete,6,6,True
+v157h_foldlocal_transport,matched v166 h1-strict and h6-utility,complete,6,6,True
+v188_exact_kalmannet,modern learned-filter comparator,complete,18,18,True
+trackssm,conditional source-faithful modern comparator,scoped_out_pending_fidelity,0,0,False

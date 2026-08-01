@@ -1,0 +1,16 @@
+{
+  "record_id": "20047603",
+  "title": "Glassy dynamics in active epithelia emerge from an interplay of mechanochemical feedback and crowding.",
+  "license": "cc-by-4.0",
+  "publication_date": "2026-05-06",
+  "remote_zip_errors": [
+    "Glassy_timelapse.zip: BadZipFile: File is not a zip file"
+  ],
+  "critical_contract": {
+    "lifeact_and_phase_same_cells": true,
+    "masks_supplied": false,
+    "tracks_supplied": false,
+    "framewise_force_aligned_to_movies": false,
+    "forecasting_gate_requires_new_segmentation_and_tracking": true
+  }
+}

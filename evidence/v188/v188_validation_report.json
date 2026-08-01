@@ -1,0 +1,54 @@
+{
+  "architecture_frozen": true,
+  "artifact_hashes_checked": 21,
+  "benchmark": {
+    "methods": 15,
+    "movie_rows": 360,
+    "summary_rows": 60
+  },
+  "bundle": "/Users/dmitrijabovskij/Desktop/Orstein-Zernike-Network/evidence/v188",
+  "evidence_complete": true,
+  "external_outer_folds": {
+    "HUVEC": 18,
+    "MDAMB231": 17
+  },
+  "fit_scope_sensitivity": {
+    "movie_rows": 96,
+    "rows": 16,
+    "train_only_h6_movies_improved": 6,
+    "train_only_h6_relative_degradation_percent": 0.6910018051575456
+  },
+  "global_sota_claim_allowed": false,
+  "input_hashes_checked": 39,
+  "kalmannet_complete": true,
+  "observability": {
+    "deployable_passes": 0,
+    "gates": 23
+  },
+  "ordered_key_set_sha256": "6e2a615490a60836e0d10432d7fc057c43b24874dc07e6e94578481db59371ce",
+  "protocol_folds": 6,
+  "protocol_tables_separated": true,
+  "publication_blockers": [
+    "B0",
+    "B1-B2",
+    "C0-C3"
+  ],
+  "publication_ready": false,
+  "robustness": {
+    "has_tracking_noise_2px": true,
+    "operating_points": [
+      "h1_strict",
+      "h6_utility"
+    ],
+    "rows": 112,
+    "stress_uncertainty_expands": true,
+    "uncertainty_response_rows": 28,
+    "uncertainty_rows": 224
+  },
+  "schema_version": 1,
+  "statistics": {
+    "confirmatory_hypotheses": 2,
+    "holm_rejections": 0
+  },
+  "status": "pass_with_blockers"
+}

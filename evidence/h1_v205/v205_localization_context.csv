@@ -1,0 +1,4 @@
+dataset,audit,quantity,value,unit,independent_localization_reference,decision
+LaChance MDCK Bulk,"Cellpose current-query reliability, six movie folds",NLL gain over best hard control,-1.146874172289445,%,False,FAIL
+C2C12 F0009,manual/automatic same-frame forensic match,median one-step disagreement,0.7386917173862457,px,True,context_only
+C2C12 F0009,manual/automatic same-frame forensic match,p90 one-step disagreement,1.8804519653320315,px,True,context_only

@@ -1,0 +1,21 @@
+{
+  "artifact_sha256": {
+    "<AIRI_SOURCE_ROOT>/outputs/lachance_publication_bundle_v188_2026-07-29/v188_multiplicity_contract.json": "942f5590c9d7dd27aa5427956f51c9e0669007191cb46f0fbfb9ed8d94351958",
+    "<AIRI_SOURCE_ROOT>/outputs/lachance_publication_bundle_v188_2026-07-29/v188_protocol_contract.csv": "7762278defb24ac0285a22f0ef305890aa5956c8d38ab2a14e4c68ead1638004",
+    "<AIRI_SOURCE_ROOT>/outputs/lachance_publication_bundle_v188_2026-07-29/v188_source_status.csv": "5ecbb6bdbb8a479708364fd2621568318e92595a28f9304e5089f163b227147a"
+  },
+  "builder_sha256": "63abedf104a76e555e7bd67400a0cf7f8a35104d94183288346dae89553e797e",
+  "contract_sha256": "c02dd1c22ae1843c9dd88ec6dd0a7414d5855824785bf5042e102a24fcafaabe",
+  "fixed_origin_oracle_primary": false,
+  "frozen": true,
+  "global_sota_claim_allowed": false,
+  "input_sha256": {
+    "<AIRI_SOURCE_ROOT>/outputs/lachance_foldlocal_semigroup_confirmation_v157e_full_2026-07-24/v157e_seed_replay_manifest.json": "1817dd8e1a4d795054a631ce4215f447c743a2cb56f6de71c947cb081d472425",
+    "<AIRI_SOURCE_ROOT>/outputs/lachance_foldlocal_semigroup_pareto_v157h_full_2026-07-24/run_manifest.json": "2c6f4ce1ff23d11d9fb917bb62935006d95f70c452b9db04bcd3c93116d7d3fb",
+    "<AIRI_SOURCE_ROOT>/outputs/lachance_online_lomo_baselines_v117_production_2026-07-21/v117_protocol_manifest.json": "739fbcccb95bba8ddef8fb9acc912f7f760066a0bf4bb305fa91ccebd8ad68a3"
+  },
+  "optional_input_sha256": {
+    "<AIRI_SOURCE_ROOT>/outputs/lachance_online_lomo_kalmannet_v188_exact_2026-07-29/kalmannet_lomo_job_manifest.csv": "f439cb29ce306270fc6b70348a47635a8fef06297979fc077bf54785402b0d76"
+  },
+  "schema_version": 1
+}

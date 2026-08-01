@@ -1,0 +1,7 @@
+gate,passed,evidence
+data_contract,True,"47 movies, ['bronchial_epithelial', 'embryonic_stem', 'skeletal_muscle'], complete mask coverage"
+future_suffix_invariance,True,prefix prediction max delta 0
+external_completed_innovation_transport,False,"v166-ext h1-strict vs own prior: h1 9.34%, h6 -14.33%; v166-ext h6-utility: h1 -8.28%, h6 4.69%"
+privileged_state,False,"h6 -1.04%, real beats controls=False, NLL reduction -0.0128"
+deployable_image_student,False,not authorized because privileged-state gate failed
+bounded_multimodal_integration,False,not authorized because deployable-state gate was not entered

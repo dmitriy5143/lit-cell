@@ -1,0 +1,11 @@
+{
+  "best_packet": "shape",
+  "best_gain_pct": 1.1001348553898211,
+  "best_gain_ci": [
+    -1.2359032317295726,
+    4.218366286805983
+  ],
+  "best_positive_movies": 2,
+  "best_holm_p": 1.0,
+  "any_packet_passes": false
+}

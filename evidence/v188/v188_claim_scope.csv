@@ -1,0 +1,7 @@
+claim_id,protocol,status,headline_eligible,allowed_claim,forbidden_claim
+C1,MDCK Bulk six-movie causal-online outer LOMO,complete,True,v166 is the strongest completed tested method under the frozen matched causal-online benchmark,global trajectory-forecasting SOTA
+C2,MDCK Bulk configuration-unseen movies 10-16,complete,True,bounded innovation transport improves the frozen prior on a separate unseen configuration cohort,pooling movies 10-16 with movies 1-6 in paired inference
+C3,HUVEC/MDA-MB-231 nested movie LOMO,complete,True,the dimensionless update mechanism transfers across tested cell domains,transfer of a universal full prior
+C4,public causal observability ladder,complete_negative,True,tested deployable image/mechanics/reliability states did not pass preregistered integration gates,cell motion is physically or visually unpredictable
+C5,exact learned-filter modern comparator,complete,True,matched comparison with KalmanNet,source-name comparison from smoke results
+C6,historical fixed-origin best-of-K oracle,supplementary_diagnostic_only,False,historical candidate-coverage diagnostic,direct comparison with rolling/receding h1 forecasts

@@ -1,0 +1,5 @@
+task_id,priority,task,status,progress,blocks_publication_ready
+A1.2,P0,Complete exact KalmanNet outer-movie LOMO,complete,18/18 fold-seed jobs,False
+B0,P0,Choose license and initialize clean release repository,owner_decision_required,0/1,True
+B1-B2,P0,Build and validate fresh-checkout public package,pending,0/1,True
+C0-C3,P0,"Write manuscript, figures, and final claim audit",pending,protocol and evidence skeleton ready,True

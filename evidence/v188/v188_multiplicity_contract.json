@@ -1,0 +1,38 @@
+{
+  "alpha": 0.05,
+  "cohort_separation": {
+    "configuration_unseen": "MDCK Bulk movies 10-16",
+    "matched_outer_lomo": "MDCK Bulk movies 1-6",
+    "rule": "never pool these cohorts in one paired statistic"
+  },
+  "confirmatory_family": [
+    {
+      "comparator": "v97_no_update",
+      "direction": "lower",
+      "horizon": 1,
+      "hypothesis_id": "H1",
+      "method": "v166_h1_strict",
+      "metric": "component_rmse"
+    },
+    {
+      "comparator": "v97_no_update",
+      "direction": "lower",
+      "horizon": 6,
+      "hypothesis_id": "H2",
+      "method": "v166_h6_utility",
+      "metric": "component_rmse"
+    }
+  ],
+  "correction": "Holm step-down across H1 and H2",
+  "effect_interval": "movie bootstrap 95% CI for comparator-minus-method RMSE",
+  "independent_unit": "outer test movie",
+  "optimizer_seed_policy": "average optimizer seeds within each movie before inference",
+  "paired_test": "exact two-sided sign-flip test over six movies",
+  "protocol_separation": {
+    "primary": "causal rolling/receding h1",
+    "rule": "never rank methods across protocol clocks",
+    "supplementary": "fixed-origin and turn classification"
+  },
+  "schema_version": 1,
+  "secondary_status": "all other method/horizon contrasts are descriptive or exploratory"
+}

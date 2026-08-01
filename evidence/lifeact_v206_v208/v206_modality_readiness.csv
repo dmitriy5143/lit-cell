@@ -1,0 +1,5 @@
+candidate,causal_lifeact_state,aligned_segmentation_channel,ready_masks,ready_tracks,framewise_force,recommended_role
+LISA timelapse s02,True,True,False,False,False,unary-state pilot after segmentation and tracking
+Mitomycin s013,True,True,False,False,False,independent-condition validation
+Y27632 s001,True,True,False,False,False,independent-condition validation
+Traction archive,False,False,False,False,False,mechanistic interpretation only; not a per-step input

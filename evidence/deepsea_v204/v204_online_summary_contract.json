@@ -1,0 +1,25 @@
+{
+  "cache_dir": "<AIRI_SOURCE_ROOT>/outputs/deepsea_online_h1_complete_cache_v204_2026-07-31",
+  "runs": {
+    "seed7": "<AIRI_SOURCE_ROOT>/outputs/deepsea_coordinate_export_direct_dimensionless_seed7_v204_2026-07-31",
+    "seed42": "<AIRI_SOURCE_ROOT>/outputs/deepsea_coordinate_export_direct_dimensionless_seed42_v204_2026-07-31",
+    "seed123": "<AIRI_SOURCE_ROOT>/outputs/deepsea_coordinate_export_direct_dimensionless_seed123_v204_2026-07-31"
+  },
+  "test_rows": 22149,
+  "test_movies": 11,
+  "test_tracks": 832,
+  "source_coordinate_unit": "cell_diameter",
+  "units": [
+    "pixel",
+    "cell_diameter"
+  ],
+  "horizons": [
+    1,
+    2,
+    4,
+    6
+  ],
+  "independent_unit": "movie",
+  "bootstrap_estimand": "ratio_of_movie_macro_rmse_means",
+  "bootstrap_repeats": 10000
+}

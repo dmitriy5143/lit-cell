@@ -1,0 +1,25 @@
+archive,sequence_prefix,scene,n_frames,first_frame,last_frame,channels,n_channels,z_planes,n_z_planes,paired_c1_c2,uncompressed_gib,example
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Mitomycin,013,147,1,147,"1,2",2,,1,1,2.2987889237701893,Drugs_MSD_Qt/Mitomycin/s013t001c1_ORG.tif | Drugs_MSD_Qt/Mitomycin/s013t001c2_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Y27632/s1,001,147,1,147,"1,2",2,,1,1,2.2987889237701893,Drugs_MSD_Qt/Y27632/s1/s001t001c1_ORG.tif | Drugs_MSD_Qt/Y27632/s1/s001t001c2_ORG.tif
+LISA.zip,LISA/LISA_timelapse/Images/LA MDCK Timelapse 49hrs,02,75,1,75,"1,2",2,"1,2,3",3,1,2.4786490481346846,LISA/LISA_timelapse/Images/LA MDCK Timelapse 49hrs_s02t01z1c1_ORG.tif | LISA/LISA_timelapse/Images/LA MDCK Timelapse 49hrs_s02t01z1c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/ERK_inhibitor/Images,008,148,1,148,1,1,,1,0,1.1572134718298912,LIfeact_oscillations/ERK_inhibitor/Images/s008t001c1_ORG.tif | LIfeact_oscillations/ERK_inhibitor/Images/s008t002c1_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Control/s60,060,147,1,147,1,1,,1,0,1.1493944618850946,Drugs_MSD_Qt/Control/s60/s060t001c1_ORG.tif | Drugs_MSD_Qt/Control/s60/s060t002c1_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Control/s62,062,147,1,147,1,1,,1,0,1.1493944618850946,Drugs_MSD_Qt/Control/s62/s062t001c1_ORG.tif | Drugs_MSD_Qt/Control/s62/s062t002c1_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Y27632/s2_to_s6,002,147,1,147,1,1,,1,0,0.1681824792176485,Drugs_MSD_Qt/Y27632/s2_to_s6/s002t001c1_ORG.tif | Drugs_MSD_Qt/Y27632/s2_to_s6/s002t002c1_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Y27632/s2_to_s6,003,147,1,147,1,1,,1,0,0.1810488309711218,Drugs_MSD_Qt/Y27632/s2_to_s6/s003t001c1_ORG.tif | Drugs_MSD_Qt/Y27632/s2_to_s6/s003t002c1_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Y27632/s2_to_s6,004,147,1,147,1,1,,1,0,0.18622352369129658,Drugs_MSD_Qt/Y27632/s2_to_s6/s004t001c1_ORG.tif | Drugs_MSD_Qt/Y27632/s2_to_s6/s004t002c1_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Y27632/s2_to_s6,005,147,1,147,1,1,,1,0,0.16171901114284992,Drugs_MSD_Qt/Y27632/s2_to_s6/s005t001c1_ORG.tif | Drugs_MSD_Qt/Y27632/s2_to_s6/s005t002c1_ORG.tif
+Drugs_MSD_Qt.zip,Drugs_MSD_Qt/Y27632/s2_to_s6,006,147,1,147,1,1,,1,0,0.16462409123778343,Drugs_MSD_Qt/Y27632/s2_to_s6/s006t001c1_ORG.tif | Drugs_MSD_Qt/Y27632/s2_to_s6/s006t002c1_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,1,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s1t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s1t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,2,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s2t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s2t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,4,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s4t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s4t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,5,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s5t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s5t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,6,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s6t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s6t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,7,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s7t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s7t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,8,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s8t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s8t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/63X_2min,9,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/63X_2min_s9t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/63X_2min_s9t02c2_ORG.tif
+LIfeact_oscillations.zip,LIfeact_oscillations/SingleCells/Images/control/63X_2min,3,57,1,57,2,1,,1,0,0.44568356685340405,LIfeact_oscillations/SingleCells/Images/control/63X_2min_s3t01c2_ORG.tif | LIfeact_oscillations/SingleCells/Images/control/63X_2min_s3t02c2_ORG.tif
+DynamicMCFL.zip,DynamicMCFL/Lifeact_tfm_bleb/PostBlebBeads/post_bleb,02,1,16,16,2,1,,1,0,0.007819009944796562,DynamicMCFL/Lifeact_tfm_bleb/PostBlebBeads/post_bleb_s02t16c2_ORG.tif
+DynamicMCFL.zip,DynamicMCFL/Lifeact_tfm_bleb/PostBlebBeads/post_bleb,15,1,16,16,2,1,,1,0,0.007819009944796562,DynamicMCFL/Lifeact_tfm_bleb/PostBlebBeads/post_bleb_s15t16c2_ORG.tif
+DynamicMCFL.zip,DynamicMCFL/Lifeact_tfm_bleb/PreBlebBeads,02,1,6,6,2,1,,1,0,0.007819009944796562,DynamicMCFL/Lifeact_tfm_bleb/PreBlebBeads/s02t6c2_ORG.tif
+DynamicMCFL.zip,DynamicMCFL/Lifeact_tfm_bleb/PreBlebBeads,15,1,6,6,2,1,,1,0,0.007819009944796562,DynamicMCFL/Lifeact_tfm_bleb/PreBlebBeads/s15t6c2_ORG.tif
