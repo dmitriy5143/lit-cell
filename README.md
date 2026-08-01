@@ -1,6 +1,7 @@
-# Sequential Cell-Motion Forecasting with Local Innovation Transport
+# LIT-Cell: Local Innovation Transport for Cell Motion
 
-This repository contains the method, experiment runners, frozen evidence, and
+**LIT-Cell** is the canonical name of the method and software described here.
+This repository contains its experiment runners, frozen evidence, and
 Russian-language manuscript for causal online forecasting of collective cell
 motion. A prediction for transition `t -> t+1` is committed before frame
 `t+1` is observed. Once that transition is complete, its innovation and the
@@ -38,7 +39,7 @@ online observation schedule, split unit, and metric.
 
 ## Repository Map
 
-- `src/airi_forecasting/`: compact reusable operators for state filtering,
+- `src/lit_cell_forecasting/`: compact reusable operators for state filtering,
   bounded transport, sparse neighbourhoods, and equivariant field laws.
 - `experiments/publication/`: exact publication runners and their dependency
   closure. Historical numeric suffixes are mapped to scientific roles in
@@ -83,6 +84,16 @@ List the principal workflows:
 python scripts/run_sequential_cell_forecasting.py --list
 ```
 
+Run the architecture-level end-to-end smoke replay:
+
+```bash
+python scripts/reproduce_lit_cell.py smoke
+```
+
+The canonical naming contract is recorded in
+[`docs/NAMING.md`](docs/NAMING.md). Exact full-data preflight and reproduction
+commands are in [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
+
 Data acquisition, exact commands, and the distinction between reproduced,
 frozen, and exploratory evidence are documented in
 [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
@@ -99,6 +110,8 @@ wrong-cell and time-shuffle controls; none improved the conditional mean of the
 final LaChance model.
 
 See [`docs/CLAIM_SCOPE.md`](docs/CLAIM_SCOPE.md) before quoting results.
+The boundary between protocol-matched comparisons and earlier fixed-origin
+architecture screens is recorded in [`docs/COMPARATORS.md`](docs/COMPARATORS.md).
 
 ## Authors and License
 

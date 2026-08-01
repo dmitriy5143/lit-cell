@@ -1,4 +1,4 @@
-# Architecture
+# LIT-Cell Architecture
 
 ## Forecasting Contract
 

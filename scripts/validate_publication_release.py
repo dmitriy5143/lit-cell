@@ -118,6 +118,57 @@ def validate_late_evidence(checks: list[str]) -> None:
     require(close(row.best_control_student_t4_nll, 3.644185), "LifeAct best-control Student-t4 NLL matches", checks)
 
 
+def validate_comparators(checks: list[str]) -> None:
+    root = EVIDENCE / "comparators"
+    aggregate = pd.read_csv(root / "online_confirmation_aggregate.csv")
+    expected = {
+        ("gru_track", 1): (3.362127, 0.507361),
+        ("hgbdt_track", 6): (7.075831, 0.897656),
+        ("kalmannet", 6): (7.788938, 0.876037),
+        ("ours_h1_strict", 6): (5.681861, 0.933964),
+        ("ours_h6_utility", 1): (3.721180, 0.396702),
+        ("ours_h6_utility", 6): (4.819533, 0.952466),
+    }
+    for key, (rmse, r2) in expected.items():
+        row = one(aggregate, method=key[0], horizon=key[1])
+        require(close(row.component_rmse_mean, rmse), f"confirmation comparator RMSE matches {key}", checks)
+        require(close(row.r2_mean, r2), f"confirmation comparator R2 matches {key}", checks)
+    require(
+        set(aggregate["horizon"].astype(int)) == {1, 2, 4, 6},
+        "confirmation comparators cover h1/h2/h4/h6",
+        checks,
+    )
+
+    contract = pd.read_csv(root / "online_confirmation_contract.csv")
+    require(
+        contract[["keys_equal", "base_equal", "anchor_equal", "targets_equal"]].all().all(),
+        "confirmation comparators share identical row/target contracts",
+        checks,
+    )
+    require(
+        contract["movies"].astype(str).tolist() == ["1,2,3,4", "5", "10,11,12,13,14,15,16"],
+        "confirmation comparator train/selection/test movie split is frozen",
+        checks,
+    )
+
+    causal = pd.read_csv(root / "online_confirmation_causal_audit.csv")
+    require(causal["future_label_sentinel_unchanged"].all(), "comparator future-label sentinel passes", checks)
+    require(causal["causal_source_violations"].eq(0).all(), "comparator causal-source audit has zero violations", checks)
+
+    matrix = pd.read_csv(root / "comparator_protocol_matrix.csv")
+    ranking = set(matrix.loc[matrix["used_for_final_ranking"].eq("yes"), "comparison_tier"])
+    require(
+        ranking == {"primary_online", "frozen_online_confirmation"},
+        "only protocol-matched online tiers enter the final ranking",
+        checks,
+    )
+    require(
+        matrix.loc[matrix["comparison_tier"].str.contains("fixed_origin"), "used_for_final_ranking"].eq("no").all(),
+        "fixed-origin architecture screen is excluded from streaming ranking",
+        checks,
+    )
+
+
 def validate_manuscript(checks: list[str]) -> None:
     text = MANUSCRIPT.read_text(encoding="utf-8")
     required_tokens = [
@@ -131,6 +182,8 @@ def validate_manuscript(checks: list[str]) -> None:
         require(re.search(token, text, flags=re.IGNORECASE) is None, f"manuscript omits internal term {token}", checks)
     require("Holm" in text and "H1" in text and "H2" in text, "manuscript states multiplicity family", checks)
     require("глобальное превосходство" in text, "manuscript limits global-SOTA claim", checks)
+    require("LIT-Cell" in text, "manuscript uses the canonical LIT-Cell name", checks)
+    require("tab:comparator_scope" in text, "manuscript declares comparator protocol tiers", checks)
 
 
 def validate_features_and_figures(checks: list[str]) -> None:
@@ -164,7 +217,10 @@ def validate_code_layout(checks: list[str]) -> None:
         )
         for depth in root_assignments:
             require(depth == "2", f"portable repository root in {runner.name}", checks)
-    require((ROOT / "src" / "airi_forecasting" / "streaming_forecaster.py").is_file(), "reusable forecasting package is present", checks)
+    require((ROOT / "src" / "lit_cell_forecasting" / "streaming_forecaster.py").is_file(), "reusable LIT-Cell forecasting package is present", checks)
+    require((ROOT / "scripts" / "reproduce_lit_cell.py").is_file(), "single LIT-Cell reproduction entry point is present", checks)
+    require((ROOT / "experiments" / "publication" / "run_lachance_online_lomo_benchmark_v102.py").is_file(), "outer-movie orchestration runner is present", checks)
+    require((ROOT / "docs" / "NAMING.md").is_file(), "canonical project identity is documented", checks)
 
 
 def main() -> None:
@@ -177,6 +233,7 @@ def main() -> None:
     validate_primary(checks)
     validate_confirmation_and_external(checks)
     validate_late_evidence(checks)
+    validate_comparators(checks)
     validate_manuscript(checks)
     validate_features_and_figures(checks)
     validate_code_layout(checks)

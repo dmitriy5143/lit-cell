@@ -6,14 +6,16 @@ workspace. Scientific names in the manuscript are deliberately version-free.
 | Scientific role | Provenance runner | Frozen evidence |
 |---|---|---|
 | coordinate/velocity route anchor | `run_lachance_route_balanced_calibrator_v16.py` | incorporated in fold-local anchor caches |
+| exact outer-movie orchestration | `run_lachance_online_lomo_benchmark_v102.py` | `evidence/v188/v188_primary_online_benchmark.csv` |
+| online neural architecture screen | `run_lachance_online_architecture_benchmark_v99.py` | `evidence/comparators/comparator_protocol_matrix.csv` |
 | online Student-t innovation filter | `run_lachance_causal_innovation_state_space_v97.py` | `evidence/v188/v188_primary_online_benchmark.csv` |
 | fold-local bounded transport | `run_lachance_foldlocal_semigroup_confirmation_v157e.py` | `evidence/v188/v188_primary_online_movie_metrics.csv` |
 | h1/h6 operating-point curve | `run_lachance_foldlocal_semigroup_pareto_v157h.py` | `evidence/h1_v205/v205_pareto_points.csv` |
 | movies 10-16 frozen confirmation | `run_lachance_streaming_transport_confirmation_v160.py` | `evidence/v188/v188_configuration_unseen_confirmation.csv` |
 | HUVEC/MDA nested evaluation | `run_lachance_external_movie_lomo_publication_v165.py` | `evidence/v188/v188_external_nested_lomo.csv` |
 | KalmanNet comparison | `run_lachance_kalmannet_outer_lomo_v188.py` | `evidence/v188/v188_primary_online_benchmark.csv` |
-| learned confirmation comparators | `run_lachance_confirmation_learned_comparators_v193.py` | `evidence/figure_sources/v160_confirmation_aggregate.csv` |
-| sparse deployment transport | `run_lachance_sparse_pareto_transport_v193.py` | `evidence/figure_sources/v193_sparse_aggregate.csv` |
+| learned confirmation comparators | `run_lachance_confirmation_learned_comparators_v193.py` | `evidence/comparators/online_confirmation_aggregate.csv` |
+| sparse deployment transport | `run_lachance_sparse_pareto_transport_v193.py` | `evidence/figure_sources/v193_sparse_pareto_aggregate.csv` |
 | E(2)-equivariant field law | `run_mdck_equivariant_field_law_v197.py` | `evidence/figure_sources/v197_field_law_*` |
 | effective potential audit | `run_mdck_effective_potential_audit_v198.py` | manuscript supplementary tables |
 | equivariant graph bridge | `run_lachance_equivariant_graph_bridge_v199.py` | manuscript and Figure 7 source tables |

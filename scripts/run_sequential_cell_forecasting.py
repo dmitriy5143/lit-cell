@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNNERS = ROOT / "experiments" / "publication"
 
 WORKFLOWS = {
+    "outer-lomo-benchmark": "run_lachance_online_lomo_benchmark_v102.py",
+    "online-neural-screen": "run_lachance_online_architecture_benchmark_v99.py",
     "online-core": "run_lachance_causal_innovation_state_space_v97.py",
     "fold-local-transport": "run_lachance_foldlocal_semigroup_confirmation_v157e.py",
     "transport-pareto": "run_lachance_foldlocal_semigroup_pareto_v157h.py",

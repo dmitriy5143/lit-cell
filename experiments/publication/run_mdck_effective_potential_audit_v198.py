@@ -24,7 +24,7 @@ from scipy.stats import binomtest
 
 import run_mdck_equivariant_field_law_v197 as v197
 
-from airi_forecasting.equivariant_field_law import (  # noqa: E402
+from lit_cell_forecasting.equivariant_field_law import (  # noqa: E402
     EPS,
     VectorOperatorModel,
     radial_clip,

@@ -36,7 +36,7 @@
 
 ## Recommended One-Sentence Positioning
 
-> A compact causal online architecture uses a learned individual state and a
+> LIT-Cell, a compact causal online architecture, uses a learned individual state and a
 > bounded graph transport of already completed neighbour innovations to reduce
 > cumulative cell-motion error across four cellular domains, while controlled
 > field analysis separates robust kinematic structure from unverified mechanics.

@@ -5,9 +5,9 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from airi_forecasting.bounded_semigroup import bounded_update, consecutive_windows
-from airi_forecasting.equivariant_field_law import vector_laplacian
-from airi_forecasting.neighbourhood_transport import (
+from lit_cell_forecasting.bounded_semigroup import bounded_update, consecutive_windows
+from lit_cell_forecasting.equivariant_field_law import vector_laplacian
+from lit_cell_forecasting.neighbourhood_transport import (
     coherent_wrong_cell,
     local_previous_state,
 )

@@ -26,7 +26,7 @@ for path in (SRC, SCRIPTS):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
-from airi_forecasting.innovation_field import (  # noqa: E402
+from lit_cell_forecasting.innovation_field import (  # noqa: E402
     local_flow_direction,
     nearest_neighbor_scale,
     sparse_gaussian_local_moments,

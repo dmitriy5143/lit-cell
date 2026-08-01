@@ -32,7 +32,7 @@ if str(SCRIPTS) not in sys.path:
 import run_mdck_effective_potential_audit_v198 as v198  # noqa: E402
 import run_mdck_equivariant_field_law_v197 as v197  # noqa: E402
 
-from airi_forecasting.equivariant_field_law import (  # noqa: E402
+from lit_cell_forecasting.equivariant_field_law import (  # noqa: E402
     EPS,
     VectorOperatorModel,
     vector_gradient,

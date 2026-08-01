@@ -6,7 +6,7 @@
     "movie_rows": 360,
     "summary_rows": 60
   },
-  "bundle": "/Users/dmitrijabovskij/Desktop/Orstein-Zernike-Network/evidence/v188",
+  "bundle": "<REPOSITORY_ROOT>/evidence/v188",
   "evidence_complete": true,
   "external_outer_folds": {
     "HUVEC": 18,

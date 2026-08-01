@@ -38,7 +38,7 @@ from scipy.stats import binomtest
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from airi_forecasting.equivariant_field_law import (  # noqa: E402
+from lit_cell_forecasting.equivariant_field_law import (  # noqa: E402
     VectorOperatorModel,
     build_equivariant_library,
     fit_shared_vector_ridge,

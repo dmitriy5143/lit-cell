@@ -13,5 +13,6 @@ new_data/
 *.log
 /tmp/
 /output/pdf/main_ru.*
+/output/reproduction_smoke/
 /evidence/publication_release_validation.json
 /evidence/manuscript_pdf_validation.json

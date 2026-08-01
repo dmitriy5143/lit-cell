@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import tempfile
 import unittest
+from pathlib import Path
 
 import numpy as np
 import torch
 
-from airi_forecasting import (
+from lit_cell_forecasting import (
     CausalInnovationStateSpaceForecaster,
     FrameBatch,
     ObservationBatch,
@@ -97,6 +99,16 @@ class ProtocolTests(unittest.TestCase):
         )
         with self.assertRaises(ProtocolError):
             invalid.validate()
+
+    def test_checkpoint_roundtrip_preserves_fresh_prediction(self) -> None:
+        expected = self.forecaster.predict_before_observe(frame(0))
+        with tempfile.TemporaryDirectory() as directory:
+            checkpoint = Path(directory) / "forecaster.pt"
+            self.forecaster.save(checkpoint)
+            restored = StreamingForecaster.load(checkpoint)
+            actual = restored.predict_before_observe(frame(0))
+        np.testing.assert_allclose(expected.mean, actual.mean, atol=1e-7, rtol=0.0)
+        np.testing.assert_allclose(expected.scale, actual.scale, atol=1e-7, rtol=0.0)
 
 
 if __name__ == "__main__":

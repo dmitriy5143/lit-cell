@@ -31,7 +31,7 @@ def selected_files() -> list[Path]:
     roots = [
         ROOT / "evidence",
         ROOT / "docs",
-        ROOT / "src" / "airi_forecasting",
+        ROOT / "src" / "lit_cell_forecasting",
         ROOT / "experiments" / "publication",
         ROOT / "manuscript",
         ROOT / "output" / "pdf",

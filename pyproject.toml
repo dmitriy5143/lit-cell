@@ -3,9 +3,9 @@ requires = ["setuptools>=75", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "airi-cell-forecasting"
-version = "0.1.0"
-description = "Causal sequential cell-motion forecasting with local innovation transport"
+name = "lit-cell-forecasting"
+version = "0.2.0"
+description = "Local Innovation Transport for causal streaming cell-motion forecasting"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {file = "LICENSE"}
@@ -23,4 +23,4 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["airi_forecasting*"]
+include = ["lit_cell_forecasting*"]

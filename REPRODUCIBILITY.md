@@ -1,8 +1,8 @@
-# Reproducibility Guide
+# LIT-Cell Reproducibility Guide
 
 ## What Is Reproducible Here
 
-The repository provides three levels of reproducibility:
+The repository provides three explicitly different levels of reproducibility:
 
 1. **Artifact verification without raw data.** Frozen CSV/JSON evidence can be
    checked for schema, internal consistency, protocol identity, and registered
@@ -10,9 +10,16 @@ The repository provides three levels of reproducibility:
 2. **Figure and manuscript reconstruction.** Publication figures and the PDF can
    be rebuilt from committed evidence, except Figure 1, which requires the raw
    LaChance movie stack for the microscopy background.
-3. **Model re-execution.** Exact runners are provided, but large raw data,
-   prepared feature grids, anchor caches, and model checkpoints must be supplied
-   locally according to their original licenses.
+3. **Publication-scale model re-execution.** The outer leave-one-movie-out
+   orchestrator rebuilds fold-local anchors, trains the causal filter, replays
+   predictions before observations, and fits the bounded transport. Raw data
+   and the prepared 1,019-column causal feature grid must be supplied locally
+   according to their original licenses.
+
+The included `smoke` command validates executable architecture and causal event
+order. It is not presented as a numerical reproduction of the publication.
+Likewise, the full command starts from the declared prepared feature grid; raw
+microscopy-to-feature extraction remains a separate data-preparation stage.
 
 The historical filename suffixes are provenance identifiers, not names used in
 the scientific presentation. Their mapping is in `docs/EXPERIMENTS.md`.
@@ -114,6 +121,54 @@ The older `v188` validator is retained as a provenance check. Its
 `--require-publication-ready` flag intentionally reports historical packaging
 tasks that are closed by the current repository-level release validator.
 
+The same validation, package compilation, and unit tests can be run through a
+single public entry point:
+
+```bash
+python scripts/reproduce_lit_cell.py verify
+```
+
+## Architecture Replay
+
+Run a small graph-enabled, predict-before-observe sequence through the public
+package and verify checkpoint round-tripping:
+
+```bash
+python scripts/reproduce_lit_cell.py smoke
+```
+
+This command uses synthetic observations solely to check event ordering,
+identity state, uncertainty outputs, graph execution, and serialization.
+
+## Full Movie-Level Re-execution
+
+First validate the input tables, feature schema, six outer folds, frozen
+hyperparameters, runner dependency closure, and exact job manifest:
+
+```bash
+python scripts/reproduce_lit_cell.py preflight \
+  --table-root "$LACHANCE_TABLE_ROOT" \
+  --feature-grid /absolute/path/to/raw_context_v2_feature_grid.csv \
+  --out-dir /absolute/path/to/lit_cell_preflight
+```
+
+Then run the exact outer-movie causal filter followed by the fold-local
+transport/Pareto stage:
+
+```bash
+python scripts/reproduce_lit_cell.py full \
+  --table-root "$LACHANCE_TABLE_ROOT" \
+  --feature-grid /absolute/path/to/raw_context_v2_feature_grid.csv \
+  --out-dir /absolute/path/to/lit_cell_full \
+  --device auto
+```
+
+The full command is intentionally long-running. Its first stage writes a
+complete frozen command manifest and rebuilds the route/coordinate anchor
+inside every outer fold. Its second stage restores those fold-local sequential
+models and selects bounded transport parameters using only the corresponding
+validation movie.
+
 ## Principal Workflows
 
 The descriptive dispatcher forwards all remaining arguments to exact runners:
@@ -130,6 +185,12 @@ Main stages:
 ```text
 online-core
   chronological training and replay of the Student-t innovation filter
+
+outer-lomo-benchmark
+  exact six-fold orchestration, fold-local anchor construction and aggregation
+
+online-neural-screen
+  protocol-matched architecture-development screen; not a confirmation table
 
 fold-local-transport
   bounded multiscale transport, wrong-cell/stale-time controls, outer movies 1-6
@@ -150,6 +211,10 @@ field-law / graph-bridge / field-dynamics
 Each runner exposes its exact required caches and paths through `--help`. Long
 runs are resumable only where the original runner explicitly implements shard
 or fold reuse; do not infer completion from a partially populated output folder.
+
+Comparator tiers and the prohibition on pooling open-loop and streaming values
+are documented in `docs/COMPARATORS.md` and encoded in
+`evidence/comparators/comparator_protocol_matrix.csv`.
 
 ## Build the Manuscript
 
