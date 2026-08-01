@@ -56,6 +56,7 @@ DEFAULT_FEATURES = (
 )
 DEFAULT_OUT = ROOT / "outputs/lachance_online_lomo_benchmark_v102_2026-07-21"
 DEFAULT_TABLE_ROOT = ROOT / "new_data/lachance_epithelia/tables"
+FEATURE_CONTRACT = ROOT / "evidence" / "raw_context_v2_feature_contract.json"
 MOVIES = (1, 2, 3, 4, 5, 6)
 HORIZONS = (1, 2, 4, 6)
 METRICS = ("component_rmse", "vector_rmse")
@@ -185,6 +186,14 @@ def finite(value: Any) -> Any:
 def stable_hash(payload: Any, length: int = 16) -> str:
     encoded = json.dumps(finite(payload), sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()[:length]
+
+
+def file_sha256(path: Path, chunk_size: int = 8 * 1024 * 1024) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(chunk_size), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def row_key_digest(rows: pd.DataFrame) -> str:
@@ -458,6 +467,11 @@ def write_manifest(args: argparse.Namespace, folds: Sequence[Fold], seeds: Seque
     feature_schema_sha256 = hashlib.sha256(
         "\0".join(feature_columns).encode("utf-8")
     ).hexdigest()
+    feature_contract = (
+        json.loads(FEATURE_CONTRACT.read_text(encoding="utf-8"))
+        if FEATURE_CONTRACT.exists()
+        else {}
+    )
     protocol = {
         "protocol_version": "v102-online-lomo-2",
         "created_unix": previous.get("created_unix", time.time()),
@@ -486,6 +500,8 @@ def write_manifest(args: argparse.Namespace, folds: Sequence[Fold], seeds: Seque
         "features": str(args.features.resolve()),
         "feature_column_count": len(feature_columns),
         "feature_schema_sha256": feature_schema_sha256,
+        "feature_contract": str(FEATURE_CONTRACT.relative_to(ROOT)),
+        "reference_feature_csv_sha256": feature_contract.get("csv_sha256"),
         "frozen_v97_h1_strict_args": list(FROZEN_V97_H1_STRICT_ARGS),
         "table_root": str(args.table_root.resolve()),
         "runner_extra": args.runner_extra,
@@ -518,6 +534,7 @@ def preflight(args: argparse.Namespace, folds: Sequence[Fold], jobs: Sequence[Jo
         complete = set(fold.train_movies) | {fold.test_movie, fold.validation_movie} == set(MOVIES)
         check(f"split_{fold.name}", disjoint and complete and len(fold.train_movies) == 4, str(asdict(fold)))
     check("features_exist", args.features.exists(), str(args.features))
+    check("feature_contract_exists", FEATURE_CONTRACT.exists(), str(FEATURE_CONTRACT))
     if args.features.exists():
         feature_columns = pd.read_csv(args.features, nrows=0).columns.astype(str).tolist()
         suspicious = [
@@ -541,6 +558,31 @@ def preflight(args: argparse.Namespace, folds: Sequence[Fold], jobs: Sequence[Jo
             raw_context_schema,
             f"columns={len(feature_columns)}; required_keys={sorted(required_keys)}; prefixes={prefixes}",
         )
+        if FEATURE_CONTRACT.exists():
+            contract = json.loads(FEATURE_CONTRACT.read_text(encoding="utf-8"))
+            schema_digest = hashlib.sha256("\0".join(feature_columns).encode("utf-8")).hexdigest()
+            check(
+                "feature_column_count_matches_frozen_contract",
+                len(feature_columns) == int(contract["column_count"]),
+                f"actual={len(feature_columns)}; expected={contract['column_count']}",
+            )
+            check(
+                "feature_schema_digest_matches_frozen_contract",
+                schema_digest == contract["column_schema_sha256"],
+                f"actual={schema_digest}; expected={contract['column_schema_sha256']}",
+            )
+            file_size = args.features.stat().st_size
+            check(
+                "feature_file_size_matches_frozen_contract",
+                file_size == int(contract["csv_bytes"]),
+                f"actual={file_size}; expected={contract['csv_bytes']}",
+            )
+            file_digest = file_sha256(args.features)
+            check(
+                "feature_file_digest_matches_frozen_contract",
+                file_digest == contract["csv_sha256"],
+                f"actual={file_digest}; expected={contract['csv_sha256']}",
+            )
     check("table_root_exists", args.table_root.exists(), str(args.table_root))
     row_limited = any(int(value) > 0 for value in (args.max_train_rows, args.max_val_rows, args.max_test_rows))
     check(

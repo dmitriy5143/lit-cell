@@ -13,7 +13,11 @@ or checkpoints.
 - `figure_sources/`: compact tables required to reconstruct plots.
 - `architecture_search_ledger.csv`: branch-level result and decision ledger.
 - `raw_context_v2_source_dictionary.csv`: source-column dictionary for the
-  1,093-column grid from which fold-local model inputs are selected.
+  exact 1,019-column final v102 grid from which fold-local model inputs are
+  selected.
+- `raw_context_v2_feature_contract.json`: ordered-schema digest, byte-level
+  reference digest, dimensions, feature-family counts, and frozen construction
+  settings for that final grid.
 
 Absolute source paths in old manifests are provenance records from the original
 workspace; portable validation uses the files committed here. A successful

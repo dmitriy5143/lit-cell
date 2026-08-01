@@ -10,16 +10,23 @@ The repository provides three explicitly different levels of reproducibility:
 2. **Figure and manuscript reconstruction.** Publication figures and the PDF can
    be rebuilt from committed evidence, except Figure 1, which requires the raw
    LaChance movie stack for the microscopy background.
-3. **Publication-scale model re-execution.** The outer leave-one-movie-out
-   orchestrator rebuilds fold-local anchors, trains the causal filter, replays
-   predictions before observations, and fits the bounded transport. Raw data
-   and the prepared 1,019-column causal feature grid must be supplied locally
-   according to their original licenses.
+3. **Raw-data and publication-scale re-execution.** A frozen preparation
+   pipeline reconstructs the tracking-aligned 1,019-column causal grid from the
+   licensed LaChance track tables and raw MDCK Bulk movie archive. The outer
+   leave-one-movie-out orchestrator then rebuilds fold-local anchors, trains the
+   causal filter, replays predictions before observations, and fits the bounded
+   transport.
 
 The included `smoke` command validates executable architecture and causal event
 order. It is not presented as a numerical reproduction of the publication.
-Likewise, the full command starts from the declared prepared feature grid; raw
-microscopy-to-feature extraction remains a separate data-preparation stage.
+The raw-microscopy preparation and model fitting remain separate commands so a
+reviewer can inspect the data contract before starting the long experiment.
+The exact final grid is frozen by
+`evidence/raw_context_v2_feature_contract.json`: 93,596 rows, 1,019 ordered
+columns, and CSV SHA-256
+`45f4b1db7949fd7fa6f791db27e7d8af6999ae7a9c0ece810fb54f1ad325de48`.
+The v102 preflight rejects a grid whose ordered schema, byte size, or digest
+differs from this registered input.
 
 The historical filename suffixes are provenance identifiers, not names used in
 the scientific presentation. Their mapping is in `docs/EXPERIMENTS.md`.
@@ -57,6 +64,9 @@ python -m pip install -r requirements-vision.txt
 Apple MPS and CPU execution are supported. Exact floating-point identity across
 hardware is not expected; protocol keys, causal controls, signs of movie-level
 effects, and tolerance-bounded headline metrics are the reproducibility targets.
+Byte-level feature hashes apply to the pinned reference environment. The
+preparation runner also supports a dimension/schema audit for diagnostic ports,
+but only the exact registered grid enters the frozen publication run.
 
 ## LaChance Data Contract
 
@@ -97,6 +107,44 @@ Prepared artifacts used by the full model include:
 All normalizers, feature filters, route labels, and calibration parameters are
 fit without the outer test movie. The test target is used only after a prediction
 has been committed.
+
+## Rebuild the Causal Feature Grid
+
+The raw MDCK Bulk archive is file
+`MDCK_Bulk_Timelapse_Data_Sample_Tissues.zip` from Zenodo record `4959169`.
+Its registered size is 9,305,087,422 bytes and its MD5 is
+`e5b5add0c7526010f957374759809bb2`. Download it with the resumable acquisition
+runner or obtain it directly under the dataset's license:
+
+```bash
+python experiments/publication/run_lachance_image_feature_extraction.py \
+  --mode download \
+  --raw-dir "$LACHANCE_DATA_ROOT/raw_timelapse" \
+  --table-root "$LACHANCE_TABLE_ROOT" \
+  --out-dir /absolute/path/to/acquisition_audit
+```
+
+Reconstruct the six tracking-aligned stacks, the exact central-cell index, the
+multiscale image and tissue-flow packets, the observability packet, and the
+final raw-context grid:
+
+```bash
+python scripts/reproduce_lit_cell.py features \
+  --mode all \
+  --table-root "$LACHANCE_TABLE_ROOT" \
+  --raw-zip "$LACHANCE_DATA_ROOT/raw_timelapse/MDCK_Bulk_Timelapse_Data_Sample_Tissues.zip" \
+  --stack-dir "$LACHANCE_DATA_ROOT/raw_timelapse/extracted_stacks/MDCK_Bulk_Timelapse_Data_Sample_Tissues" \
+  --out-dir /absolute/path/to/lit_cell_features \
+  --reference-check hash
+```
+
+The `features` command forwards to `scripts/prepare_lit_cell_features.py`. The
+preparation is resumable. It records rows, columns, byte sizes, and hashes
+for six stages in `feature_preparation_report.json`. A completed reference run
+must report `matches_reference=true` for every stage. To audit an existing
+preparation without rebuilding it, replace `--mode all` with `--mode verify`.
+The exact historical stage dimensions and hashes are registered in
+`evidence/raw_context_v2_feature_contract.json`.
 
 ## Verify the Frozen Release
 

@@ -5,6 +5,7 @@ workspace. Scientific names in the manuscript are deliberately version-free.
 
 | Scientific role | Provenance runner | Frozen evidence |
 |---|---|---|
+| raw microscopy and feature preparation | `prepare_lit_cell_features.py` plus the six extraction/build modules | `evidence/raw_context_v2_feature_contract.json` |
 | coordinate/velocity route anchor | `run_lachance_route_balanced_calibrator_v16.py` | incorporated in fold-local anchor caches |
 | exact outer-movie orchestration | `run_lachance_online_lomo_benchmark_v102.py` | `evidence/v188/v188_primary_online_benchmark.csv` |
 | online neural architecture screen | `run_lachance_online_architecture_benchmark_v99.py` | `evidence/comparators/comparator_protocol_matrix.csv` |

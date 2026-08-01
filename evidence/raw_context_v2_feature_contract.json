@@ -1,0 +1,84 @@
+{
+  "schema": "lit-cell-raw-context-v2-dense-index-v1",
+  "dataset": "MDCK_Bulk",
+  "movies": [1, 2, 3, 4, 5, 6],
+  "artifact_name": "raw_context_v2_feature_grid.csv",
+  "row_count": 93596,
+  "column_count": 1019,
+  "csv_bytes": 1145186420,
+  "csv_sha256": "45f4b1db7949fd7fa6f791db27e7d8af6999ae7a9c0ece810fb54f1ad325de48",
+  "column_schema_sha256": "f08a78afc531b3806a12427dfc9a0517e9d03b983fefda32470af768f5d90005",
+  "source_dictionary": "evidence/raw_context_v2_source_dictionary.csv",
+  "identity_columns": ["dataset", "sequence", "frame", "track_id"],
+  "coordinate_columns": ["x_px", "y_px"],
+  "causal_feature_prefixes": ["ms_", "tf_", "obs_", "rc_"],
+  "family_counts": {
+    "key": 4,
+    "current_coordinate": 2,
+    "multiscale_image": 145,
+    "tissue_flow": 249,
+    "completed_motion": 2,
+    "tracking_quality": 1,
+    "observation_state": 215,
+    "raw_multicell_context": 401
+  },
+  "raw_source": {
+    "zenodo_record": 4959169,
+    "file_name": "MDCK_Bulk_Timelapse_Data_Sample_Tissues.zip",
+    "bytes": 9305087422,
+    "md5": "e5b5add0c7526010f957374759809bb2",
+    "sequence_stacks": 6,
+    "frames_per_stack": 49
+  },
+  "stage_artifacts": {
+    "tracking_index": {
+      "rows": 95549,
+      "columns": 7,
+      "bytes": 5696744,
+      "sha256": "56eccf93dd7c5956362f4cc1f304410d355271d711f9635b7d7564e2f2de41fe"
+    },
+    "multiscale_image": {
+      "rows": 95549,
+      "columns": 151,
+      "bytes": 277124382,
+      "sha256": "914be457ed754fa5c3471518e4b3a4e0f739862cf6d3b55f036d4418f41d83c6"
+    },
+    "tissue_flow": {
+      "rows": 93596,
+      "columns": 255,
+      "bytes": 259366961,
+      "sha256": "08ca2a0629cffd413b7c8a2ebf1db937a08cc8ef05ac7c4a81f6b398caf1dfb6"
+    },
+    "combined": {
+      "rows": 93596,
+      "columns": 400,
+      "bytes": 516366016,
+      "sha256": "47381553fd84428390d99368d5a7399fafdacc03cc93526d53a873b879e54e75"
+    },
+    "observability": {
+      "rows": 93596,
+      "columns": 618,
+      "bytes": 727775800,
+      "sha256": "4700a47571f50351ebe62fb27770e9bf91419b20c9b56dc338f78095c7451ce1"
+    },
+    "raw_context_v2": {
+      "rows": 93596,
+      "columns": 1019,
+      "bytes": 1145186420,
+      "sha256": "45f4b1db7949fd7fa6f791db27e7d8af6999ae7a9c0ece810fb54f1ad325de48"
+    }
+  },
+  "construction": {
+    "tracking_index_crop_fraction": 0.025,
+    "multiscale_image_radii_px": [8, 16, 24, 40],
+    "tissue_flow_radii_px": [64, 128, 256],
+    "observability_density_radii_px": [40, 80, 120, 240, 320],
+    "raw_context_radii_px": [24, 56, 96],
+    "raw_context_temporal_radii_px": [24, 56],
+    "raw_context_temporal_lags": [1, 2, 4],
+    "raw_context_offset_scale": 1.25,
+    "raw_context_neighbour_radius_px": 24,
+    "raw_context_neighbour_k": 8
+  },
+  "causality": "Every inference feature is available at or before the issue frame. Targets and future coordinates are excluded from this artifact."
+}

@@ -245,6 +245,28 @@ def verify(_: argparse.Namespace) -> None:
         run(command)
 
 
+def features(args: argparse.Namespace) -> None:
+    command = [
+        sys.executable,
+        str(ROOT / "scripts" / "prepare_lit_cell_features.py"),
+        "--mode",
+        args.mode,
+        "--table-root",
+        str(args.table_root.resolve()),
+        "--stack-dir",
+        str(args.stack_dir.resolve()),
+        "--out-dir",
+        str(args.out_dir.resolve()),
+        "--reference-check",
+        args.reference_check,
+    ]
+    if args.raw_zip is not None:
+        command.extend(["--raw-zip", str(args.raw_zip.resolve())])
+    if not args.resume:
+        command.append("--no-resume")
+    run(command)
+
+
 def add_data_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--table-root", type=Path, required=True)
     parser.add_argument("--feature-grid", type=Path, required=True)
@@ -271,6 +293,18 @@ def parse_args() -> argparse.Namespace:
         help="Validate frozen evidence, code compilation, and unit tests.",
     )
     verify_parser.set_defaults(function=verify)
+    feature_parser = subparsers.add_parser(
+        "features",
+        help="Rebuild or verify the frozen raw-microscopy feature grid.",
+    )
+    feature_parser.add_argument("--mode", choices=["preflight", "index", "build", "all", "verify"], default="preflight")
+    feature_parser.add_argument("--table-root", type=Path, required=True)
+    feature_parser.add_argument("--stack-dir", type=Path, required=True)
+    feature_parser.add_argument("--raw-zip", type=Path)
+    feature_parser.add_argument("--out-dir", type=Path, required=True)
+    feature_parser.add_argument("--reference-check", choices=["off", "schema", "hash"], default="hash")
+    feature_parser.add_argument("--resume", action=argparse.BooleanOptionalAction, default=True)
+    feature_parser.set_defaults(function=features)
     preflight_parser = subparsers.add_parser(
         "preflight",
         help="Validate full LOMO inputs and write the exact job manifest.",

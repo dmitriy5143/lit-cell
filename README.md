@@ -52,6 +52,8 @@ online observation schedule, split unit, and metric.
 - `output/pdf/`: rendered manuscript after publication quality assurance.
 - `scripts/run_sequential_cell_forecasting.py`: descriptive dispatcher for the
   principal publication workflows.
+- `scripts/prepare_lit_cell_features.py`: frozen raw-microscopy-to-feature-grid
+  pipeline with stage-level reference hashes.
 
 ## Fast Verification
 
