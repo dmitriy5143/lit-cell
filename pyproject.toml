@@ -21,6 +21,10 @@ dependencies = [
   "torch-geometric>=2.7,<3",
 ]
 
+[project.urls]
+Repository = "https://github.com/dmitriy5143/lit-cell"
+Documentation = "https://github.com/dmitriy5143/lit-cell/blob/main/REPRODUCIBILITY.md"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["lit_cell_forecasting*"]

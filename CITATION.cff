@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use LIT-Cell, please cite this software and its accompanying manuscript."
+title: "LIT-Cell: Local Innovation Transport for Cell Motion"
+type: software
+authors:
+  - family-names: Stanislavchuk-Abovsky
+    given-names: Dmitry
+  - family-names: Zakharov
+    given-names: Andrey P.
+repository-code: "https://github.com/dmitriy5143/lit-cell"
+url: "https://github.com/dmitriy5143/lit-cell"
+version: 0.2.0
+date-released: 2026-08-02
+abstract: >-
+  A compact causal architecture for online cell-motion forecasting using a
+  learned innovation state and bounded local transport of completed neighbour
+  innovations.

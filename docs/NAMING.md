@@ -9,6 +9,7 @@ Use the following identifiers consistently:
 - Python distribution: `lit-cell-forecasting`;
 - Python package: `lit_cell_forecasting`;
 - reproduction entry point: `scripts/reproduce_lit_cell.py`.
+- canonical repository: `https://github.com/dmitriy5143/lit-cell`.
 
 The name describes the reportable mechanism: a causal innovation state filter
 followed by bounded local transport of completed neighbouring innovations. It
