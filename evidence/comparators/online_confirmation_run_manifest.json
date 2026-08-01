@@ -1,0 +1,62 @@
+{
+  "confirmation_cache": "/Users/dmitrijabovskij/Desktop/Airi/outputs/lachance_track_native_v160_confirmation_cache",
+  "confirmation_metrics_used_for_training_or_selection": false,
+  "confirmation_movies": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "development_cache": "/Users/dmitrijabovskij/Desktop/Airi/outputs/lachance_track_native_v160_development_cache",
+  "fit_movies": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "hgbdt_visual_v52_features_used": false,
+  "horizons": [
+    1,
+    2,
+    4,
+    6
+  ],
+  "methods": [
+    "hgbdt_track",
+    "gru_track",
+    "kalmannet"
+  ],
+  "outputs": {
+    "v193_aggregate.csv": "48754fcdb0e202f69d7808a3adb3a3d8e27706332c8301ac77fec27d1e5611ff",
+    "v193_article_table.csv": "dae3fb00d6e9791d91e09c14a0496b3973f43c58078e01e536a4db2732b81cbc",
+    "v193_causal_audit.csv": "7e1bd3a865ddf44645f1a439670f8e8c6e68c49e889d97c44ae45c4919c6df8b",
+    "v193_data_contract.csv": "690410c26385ea05f6139f4a7f4b0a41f921e079ecb3e530a62bbc2f3973cdd9",
+    "v193_decision_report.md": "58b76e019180b5dfb3e46bfa89c1d0d4a25e864aca73e05d014c883162b9e30d",
+    "v193_ensemble_predictions.npz": "01b007284547956383ef9dfe1b2f783d173d130216672ea3962bbd554c472526",
+    "v193_hgbdt_validation_sweep.csv": "5dd7bbffdba8aae74d4599a8e24ec254e414a9f4f56c12ac50952e356da518c5",
+    "v193_kalmannet_jobs.csv": "bd83cc016ce4b08dae3c557f02967de2eb239a04ff5c130dac71560b1f9df0a8",
+    "v193_model_metadata.csv": "801c407951da87f09e03901dfcac7d1781aefc4b441078caf3eb7880f8655704",
+    "v193_movie_metrics.csv": "c002a18620bb8b40491b43a31ad20529b30fcec60b29fc0b4dea657b1f688deb",
+    "v193_pairwise_statistics.csv": "cfacb1da03cd3ab32bc6dc3f1b99a576959b9ee5f00675de51ac0182d2adf7de",
+    "v193_predictions_seed123.npz": "607d0dca783bb962235f545b2b44ab59235856f480a50710cc5337f8772d9660",
+    "v193_predictions_seed42.npz": "c6f651b6b7baac94021eb3972e97d85b58f52c64df3d44a82be581d29dfa34ba",
+    "v193_predictions_seed7.npz": "d95d0172cc0e907bce1651f510bcf38c40e20fcdd96a891c1446baa6df93ff4b",
+    "v193_seed_metrics.csv": "eedaf9ec53f6d561999b84550a1fd6e44893fc5c7bb87671bcee74b591c7e163",
+    "v193_validation_selection.csv": "641d775e47f0910208279087e4a67a7565202a9a0501d9f4b2434c1d5532e252"
+  },
+  "runner": "/Users/dmitrijabovskij/Desktop/Airi/scripts/run_lachance_confirmation_learned_comparators_v193.py",
+  "runner_sha256": "097164237a8cfd4b6385428f80077f772c6bdf806e2f699137db7c83e7bc53d1",
+  "seeds": [
+    7,
+    42,
+    123
+  ],
+  "three_seed_prediction_ensemble": true,
+  "v160_reference": "/Users/dmitrijabovskij/Desktop/Airi/outputs/lachance_streaming_transport_confirmation_v160_full_2026-07-27",
+  "validation_movies": [
+    5
+  ]
+}

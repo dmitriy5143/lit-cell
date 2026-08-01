@@ -1,0 +1,7 @@
+split,input_mode,rows,movies,feature_dim,feature_digest,future_label_sentinel_unchanged,causal_source_violations,movie_split_overlap,latest_allowed_source,prediction_target,scaler_fit,train_anchor_provenance,method,seed
+train,raw_coordinate,59968,"1,2,3,4",90,0bef8867048baeba,True,0,,frame_t,completed_transition_t_to_t+1,train_movies_only,movie-held-out OOF exact v97 cache,hgbdt_track,shared
+train,v52_anchor,59968,"1,2,3,4",96,94f552f4189e2c7b,True,0,,frame_t,completed_transition_t_to_t+1,train_movies_only,movie-held-out OOF exact v97 cache,hgbdt_track,shared
+val,raw_coordinate,14997,5,90,f899e799b926e9d5,True,0,,frame_t,completed_transition_t_to_t+1,train_movies_only,held-out exact v97 cache,hgbdt_track,shared
+val,v52_anchor,14997,5,96,b35ee769e482a973,True,0,,frame_t,completed_transition_t_to_t+1,train_movies_only,held-out exact v97 cache,hgbdt_track,shared
+test,raw_coordinate,104922,"10,11,12,13,14,15,16",90,090f980c26ddcad6,True,0,,frame_t,completed_transition_t_to_t+1,train_movies_only,held-out exact v97 cache,hgbdt_track,shared
+test,v52_anchor,104922,"10,11,12,13,14,15,16",96,5caf61e94bb89b26,True,0,,frame_t,completed_transition_t_to_t+1,train_movies_only,held-out exact v97 cache,hgbdt_track,shared

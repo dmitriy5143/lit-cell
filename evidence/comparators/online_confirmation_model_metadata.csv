@@ -1,0 +1,10 @@
+method,seconds,seed,selected_input_mode,selected_eta,validation_weighted_component_rmse,hyperparameters,train_feature_dim,prediction_seconds,selection_scope,fit_scope,kind,best_epoch,val_weighted_rolling_rmse,validation_horizon_weights,parameters,no_future_sentinel_pass
+hgbdt_track,72.73161758398055,7,v52_anchor,0.75,3.5367060041427614,"{'learning_rate': 0.04, 'max_leaf_nodes': 31, 'l2_regularization': 1.0}",96.0,2.878484041983029,movie_5_only,movies_1_4_only,,,,,,
+gru_track,29.695725458004745,7,,,,,,,movie_5_early_stopping_only,movies_1_4_only,gru,18.0,3.5402897024154663,"{1: 0.9, 2: 0.05, 4: 0.03, 6: 0.02}",94466.0,
+hgbdt_track,66.82520204098546,42,v52_anchor,0.75,3.536990747451782,"{'learning_rate': 0.04, 'max_leaf_nodes': 31, 'l2_regularization': 1.0}",96.0,2.103102833003504,movie_5_only,movies_1_4_only,,,,,,
+gru_track,30.565243333985563,42,,,,,,,movie_5_early_stopping_only,movies_1_4_only,gru,20.0,3.548452987670898,"{1: 0.9, 2: 0.05, 4: 0.03, 6: 0.02}",94466.0,
+hgbdt_track,66.77312854200136,123,raw_coordinate,0.75,3.537939043045044,"{'learning_rate': 0.08, 'max_leaf_nodes': 31, 'l2_regularization': 10.0}",90.0,1.3276376659923699,movie_5_only,movies_1_4_only,,,,,,
+gru_track,25.55937504101894,123,,,,,,,movie_5_early_stopping_only,movies_1_4_only,gru,15.0,3.5545462989807133,"{1: 0.9, 2: 0.05, 4: 0.03, 6: 0.02}",94466.0,
+kalmannet,,7,kalmannet_ca,,,,,,movie_5_only,movies_1_4_only,,,,,,True
+kalmannet,,42,kalmannet_ca,,,,,,movie_5_only,movies_1_4_only,,,,,,True
+kalmannet,,123,kalmannet_cv,,,,,,movie_5_only,movies_1_4_only,,,,,,True
