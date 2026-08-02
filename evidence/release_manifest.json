@@ -154,24 +154,24 @@
       "sha256": "22d6e6a557e12ebe1ff191300a50f762be2af3078d9f08c54eddac283795c778"
     },
     "evidence/article_numeric_sources/outputs/lachance_publication_bundle_v188_2026-07-29/v188_observability_gate_matrix.csv": {
-      "bytes": 8735,
-      "sha256": "dea2ae44a5da10a7772707f2b79234b0a82f8ef26d56356a4049c6ad78a3df94"
+      "bytes": 7907,
+      "sha256": "4bc6d7a178095c6d2728e515cd6f8b8742ad9467e353a1e4177bdf9e2471ef40"
     },
     "evidence/article_numeric_sources/outputs/lachance_publication_bundle_v188_2026-07-29/v188_paired_movie_statistics.csv": {
       "bytes": 15963,
       "sha256": "2eab7075e940b0142a041de692b9184f32d281b88e74559f0daef7902205d180"
     },
     "evidence/article_numeric_sources/outputs/lachance_publication_bundle_v188_2026-07-29/v188_primary_online_benchmark.csv": {
-      "bytes": 28821,
-      "sha256": "9738d93d98ce89f94792da2ea60f1a0f2e4ee38a67d549c4771bd31752f9d4d9"
+      "bytes": 26661,
+      "sha256": "eebccb69a840d6b6f0b2ccf6a2e6bfd7f0bda1fc7da68fe85cbb77f2ca49c503"
     },
     "evidence/article_numeric_sources/outputs/lachance_publication_bundle_v188_2026-07-29/v188_robustness_matrix.csv": {
-      "bytes": 35333,
-      "sha256": "3319863bd9e1a582e81a50057fa53a343bca66336428c36acd634838e4c92784"
+      "bytes": 31301,
+      "sha256": "126fbac31129210f71e5225d03d7262b4f852c3d54ab63787fcbfdab9261f76d"
     },
     "evidence/article_numeric_sources/outputs/lachance_publication_bundle_v188_2026-07-29/v188_robustness_uncertainty.csv": {
-      "bytes": 91798,
-      "sha256": "db2587ee44658d67ac40de130338bcfa6fd2704cf4c73f7e13cd46aca769d176"
+      "bytes": 83734,
+      "sha256": "755fc1620781c49433ff7a7a558b45bca2613cb8286cce28478df39bda2570a1"
     },
     "evidence/article_numeric_sources/outputs/lachance_streaming_information_ladder_v161_full_2026-07-27/v161_information_ladder_summary.csv": {
       "bytes": 3575,
@@ -1198,8 +1198,8 @@
       "sha256": "9ab09b1d1f8304b634705d89f7d917f0519b597109fdae373eedb9db97956ebd"
     },
     "scripts/validate_publication_release.py": {
-      "bytes": 22166,
-      "sha256": "de927bef3b75b5fe2b75ed1ade19cc56540a198b28c43fb35333ed573b2d68cd"
+      "bytes": 23082,
+      "sha256": "5a780982c5e78337e94ba388722c333fe64cddff6b319a04be4cf60a9ba94be4"
     },
     "src/lit_cell_forecasting/__init__.py": {
       "bytes": 659,

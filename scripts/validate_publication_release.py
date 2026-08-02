@@ -18,6 +18,10 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "evidence"
 REPORT = EVIDENCE / "publication_release_validation.json"
+HOST_PATH_PATTERNS = (
+    re.compile(r"/Users/[^/\s,]+/(?:Desktop|Documents|Downloads)/"),
+    re.compile(r"(?i)[A-Z]:[\\/](?:Users|Documents and Settings)[\\/][^\\/\s,]+[\\/]"),
+)
 
 
 def require(condition: bool, message: str, checks: list[str]) -> None:
@@ -50,6 +54,25 @@ def validate_manifest(checks: list[str]) -> None:
         require(artifact.is_file(), f"manifest artifact exists: {relative}", checks)
         digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
         require(digest == metadata["sha256"], f"manifest hash matches: {relative}", checks)
+
+
+def validate_portability(checks: list[str]) -> None:
+    payload = json.loads((EVIDENCE / "release_manifest.json").read_text(encoding="utf-8"))
+    offenders: list[str] = []
+    for relative in payload.get("files", {}):
+        artifact = ROOT / relative
+        data = artifact.read_bytes()
+        if b"\x00" in data:
+            continue
+        text = data.decode("utf-8", errors="ignore")
+        if any(pattern.search(text) for pattern in HOST_PATH_PATTERNS):
+            offenders.append(relative)
+    require(
+        not offenders,
+        "release artifacts contain no host-specific user-directory paths"
+        + (f": {', '.join(offenders)}" if offenders else ""),
+        checks,
+    )
 
 
 def validate_article_numeric_audit(checks: list[str]) -> None:
@@ -418,6 +441,7 @@ def main() -> None:
     checks: list[str] = []
     if not args.skip_manifest:
         validate_manifest(checks)
+    validate_portability(checks)
     validate_article_numeric_audit(checks)
     validate_primary(checks)
     validate_confirmation_and_external(checks)
