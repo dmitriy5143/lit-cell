@@ -1,3 +1,4 @@
 -r requirements.txt
 cellpose==4.2.1.1
+opencv-python-headless==4.13.0.92
 remotezip==0.12.3

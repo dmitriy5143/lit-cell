@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import re
@@ -51,6 +52,40 @@ def validate_manifest(checks: list[str]) -> None:
         require(digest == metadata["sha256"], f"manifest hash matches: {relative}", checks)
 
 
+def validate_article_numeric_audit(checks: list[str]) -> None:
+    audit_dir = EVIDENCE / "article_numeric_audit"
+    registered = pd.read_csv(audit_dir / "article_numeric_claims.csv")
+    require(len(registered) == 287, "article registry contains all 287 quantitative claims", checks)
+    require(registered["claim_id"].is_unique, "article quantitative claim identifiers are unique", checks)
+    require(registered["status"].eq("verified").all(), "all article quantitative claims are verified", checks)
+    require(registered["source"].nunique() == 46, "article claims trace to exactly 46 frozen source tables", checks)
+    for relative in sorted(registered["source"].unique()):
+        require((ROOT / relative).is_file(), f"article numeric source exists: {relative}", checks)
+
+    module_path = ROOT / "experiments" / "publication" / "audit_cell_motion_article_numbers.py"
+    spec = importlib.util.spec_from_file_location("lit_cell_article_numeric_audit", module_path)
+    if spec is None or spec.loader is None:
+        raise AssertionError(f"Cannot load numeric audit module: {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    recomputed, _ = module.audit()
+
+    columns = ["claim_id", "quantity", "value", "unit", "source", "interpretation", "status"]
+    left = registered[columns].sort_values("claim_id").reset_index(drop=True)
+    right = recomputed[columns].sort_values("claim_id").reset_index(drop=True)
+    require(left["claim_id"].equals(right["claim_id"]), "recomputed article claim identifiers match the registry", checks)
+    require(
+        left.drop(columns="value").equals(right.drop(columns="value")),
+        "recomputed article claim metadata and provenance match the registry",
+        checks,
+    )
+    require(
+        all(close(actual, expected, atol=1e-12) for actual, expected in zip(left["value"], right["value"])),
+        "all 287 article values reproduce from frozen source tables",
+        checks,
+    )
+
+
 def validate_primary(checks: list[str]) -> None:
     benchmark = pd.read_csv(EVIDENCE / "v188" / "v188_primary_online_benchmark.csv")
     require(benchmark["movies"].eq(6).all(), "primary benchmark uses six outer movies", checks)
@@ -71,7 +106,11 @@ def validate_primary(checks: list[str]) -> None:
 
     paired = pd.read_csv(EVIDENCE / "v188" / "v188_paired_movie_statistics.csv")
     primary = paired[paired["confirmatory"].eq(True)].sort_values("hypothesis_id")
-    require(primary["hypothesis_id"].tolist() == ["H1", "H2"], "confirmatory family is exactly H1/H2", checks)
+    require(
+        primary["hypothesis_id"].tolist() == ["H1", "H2"],
+        "v188 release multiplicity table contains exactly H1/H2",
+        checks,
+    )
     h1, h2 = primary.iloc[0], primary.iloc[1]
     require(close(h1.holm_adjusted_p, 0.84375), "H1 Holm-adjusted p is 0.84375", checks)
     require(close(h2.exact_two_sided_sign_flip_p, 0.03125), "H2 raw exact p is 0.03125", checks)
@@ -326,6 +365,32 @@ def validate_code_layout(checks: list[str]) -> None:
         checks,
     )
     require((ROOT / "docs" / "NAMING.md").is_file(), "canonical project identity is documented", checks)
+    require((ROOT / "docs" / "DATASETS.md").is_file(), "dataset acquisition and interpretation contract is documented", checks)
+    acquisition_scripts = {
+        "audit_lachance_raw_sample.py",
+        "build_simple_trackmate_xml_tables.py",
+        "prepare_c2c12_online_tracks_v97.py",
+        "intake_gigascience_wound_healing_v167.py",
+        "intake_mdck_force_motion_mechanics_v150.py",
+        "intake_future_state_sources_v173.py",
+        "audit_identified_cell_driver_upper_bound_v171.py",
+        "screen_collective_dataset_candidates.py",
+    }
+    require(
+        all((ROOT / "scripts" / name).is_file() for name in acquisition_scripts),
+        "dataset acquisition and conversion runner closure is present",
+        checks,
+    )
+    deepsea_manifest = EVIDENCE / "data_manifests" / "deepsea_v204_drive_manifest.json"
+    require(deepsea_manifest.is_file(), "frozen DeepSea object manifest is present", checks)
+    require(
+        hashlib.sha256(deepsea_manifest.read_bytes()).hexdigest()
+        == "6648e246207fb298c525b8946ec94e5d0ba40cd1a6d23e7b734b80fd152dfca0",
+        "frozen DeepSea object manifest hash matches",
+        checks,
+    )
+    acquisition = pd.read_csv(EVIDENCE / "data_reacquisition_manifest.csv")
+    require(len(acquisition) == 11, "data reacquisition registry covers all 11 archived sources", checks)
 
 
 def validate_identity(checks: list[str]) -> None:
@@ -353,6 +418,7 @@ def main() -> None:
     checks: list[str] = []
     if not args.skip_manifest:
         validate_manifest(checks)
+    validate_article_numeric_audit(checks)
     validate_primary(checks)
     validate_confirmation_and_external(checks)
     validate_late_evidence(checks)

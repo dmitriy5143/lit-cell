@@ -27,6 +27,9 @@ differs from this registered input.
 
 The historical filename suffixes are provenance identifiers, not names used in
 the scientific presentation. Their mapping is in `docs/EXPERIMENTS.md`.
+The source URLs, acquisition scripts, and interpretation role of every external
+dataset are indexed in `docs/DATASETS.md` and
+`evidence/data_reacquisition_manifest.csv`.
 
 ## Environment
 
@@ -203,6 +206,8 @@ The validator checks:
 - C2C12 experiment-external transport, controls, and observation-quality strata;
 - the exact feature-preparation contract and dependency closure;
 - registered comparator tiers and canonical project identity.
+- all 287 manuscript quantities by recomputing them from 46 committed source
+  tables and comparing values, metadata, and provenance with the registry.
 
 The older `v188` validator is retained as a provenance check. Its
 `--require-publication-ready` flag intentionally reports historical packaging
@@ -309,12 +314,16 @@ are documented in `docs/COMPARATORS.md` and encoded in
 
 ## Statistical Unit and Multiplicity
 
-The independent unit is an outer test movie. The confirmatory family contains
-exactly two hypotheses: the strict h1 operating point and the cumulative h6
-operating point, each compared with the matched no-update prediction. Exact
-two-sided sign-flip tests are corrected by Holm across these two hypotheses.
-Other horizon-wise, one-sided, mechanistic, and external-domain contrasts are
-explicitly exploratory or secondary unless stated otherwise.
+The independent unit is an outer test movie. The frozen v188 release table
+registers an H1/H2 accounting family: the strict h1 and cumulative h6 operating
+points, each compared with the matched no-update prediction, with exact
+two-sided sign-flip tests and Holm adjustment. This machine contract is not
+presented as a prospective preregistration. In the research chronology, only
+the h1 endpoint was initially confirmatory on movies 1-6; the h6 endpoint was
+selected during development and frozen before evaluation on movies 10-16.
+The manuscript therefore uses that more conservative chronology and reports
+the four-horizon one-sided Holm family separately. Other mechanistic and
+external-domain contrasts are exploratory or secondary unless stated otherwise.
 
 Bootstrap intervals resample movies, not cell rows. The main prediction tables
 use 20,000 movie-level bootstrap repetitions; diagnostic field curves use 2,000.

@@ -102,7 +102,8 @@ commands are in [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
 
 Data acquisition, exact commands, and the distinction between reproduced,
 frozen, and exploratory evidence are documented in
-[`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
+[`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) and
+[`docs/DATASETS.md`](docs/DATASETS.md).
 
 ## Scientific Scope
 

@@ -33,8 +33,12 @@ workspace. Scientific names in the manuscript are deliberately version-free.
 
 ## Evidence Classes
 
-**Confirmatory.** The H1/H2 family on MDCK Bulk movies 1-6 uses exact two-sided
-movie-level sign-flip tests and Holm correction across two hypotheses.
+**Frozen release accounting.** The v188 H1/H2 table on MDCK Bulk movies 1-6
+uses exact two-sided movie-level sign-flip tests and Holm correction across two
+hypotheses. It is a machine-readable publication-era contract, not a claim of
+prospective preregistration. In the conservative research chronology, h1 was
+the initial confirmatory endpoint, whereas h6 was developed on movies 1-6 and
+then frozen before the separate movies 10-16 evaluation.
 
 **Configuration-frozen.** Movies 10-16 were not used to choose the reported
 configuration, but the broader project had previously inspected this data

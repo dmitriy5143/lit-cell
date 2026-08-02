@@ -1,0 +1,9 @@
+annotation_kind,objective,horizon,comparison,fields,experiments,mean_advantage_px,ci_low,ci_high,probability_positive
+automatic,horizon_balanced,6,real_vs_no_update,48,3,0.0599724826959809,0.0530988611882144,0.0698193278331466,1.0
+automatic,horizon_balanced,6,real_vs_own_only,48,3,0.0071418944920748,0.0061978218186922,0.0083405690911819,1.0
+automatic,horizon_balanced,6,real_vs_wrong_cell,48,3,0.0742838855627066,0.0655628740661443,0.0869571592967632,1.0
+automatic,horizon_balanced,6,real_vs_stale_time,48,3,0.0141746141443296,0.013258757018434,0.0152106771390612,1.0
+manual,horizon_balanced,6,real_vs_no_update,48,3,0.1658937912237732,0.1494892073060794,0.182637457721728,1.0
+manual,horizon_balanced,6,real_vs_own_only,48,3,0.0008400201111233,0.0002130967135341,0.001314512941001,0.99535
+manual,horizon_balanced,6,real_vs_wrong_cell,48,3,0.2224297636680161,0.1951375304299036,0.251870961360514,1.0
+manual,horizon_balanced,6,real_vs_stale_time,48,3,0.0717243505654283,0.0622619009376892,0.0837936242597282,1.0

@@ -1,0 +1,14 @@
+module,variant,horizon,movie_macro_rmse,r2,gain_pct,status
+coordinate,constant_velocity,1,0.1940471523187377,-0.8966336250305176,,reference
+coordinate,v97_direct_prior,1,0.1708656298843297,-0.4463586373762651,11.946334773483569,h1_positive
+coordinate,constant_velocity,6,0.2080564539540897,0.6848225051706488,,reference
+coordinate,v97_direct_prior,6,0.2129725800319151,0.7056799693541094,-2.362880835655409,prior_ablation
+complete_system,v166_external_h1_strict,1,0.1552821121395986,,19.977123970087675,h1_operating_point
+complete_system,v166_external_h1_strict,6,0.240450983855998,,-15.570067299645782,h6_tradeoff
+complete_system,v166_external_h6_utility,1,0.1854682938737245,,4.4210174395766275,h1_guard_fail_vs_own_prior
+complete_system,v166_external_h6_utility,6,0.2004499403687251,,3.6559854024249945,best_external_h6_but_joint_gate_fail
+privileged_state,zero_state,6,0.2137285619974136,0.6957272616299716,,reference
+privileged_state,real_state,6,0.2159581699154593,0.6867745247754183,-1.043196050733138,fail
+capacity_control,noncausal_future_state,6,0.1396546263925054,0.9117142774842002,34.657948807892424,capacity_pass_only
+transport_diagnostic,h6_guard10_own_only,1,0.1865057475290892,,-8.887964088199638,h1_guard_fail
+transport_diagnostic,h6_guard10_own_only,6,0.2005519888173441,,4.645139764303964,h6_signal_only

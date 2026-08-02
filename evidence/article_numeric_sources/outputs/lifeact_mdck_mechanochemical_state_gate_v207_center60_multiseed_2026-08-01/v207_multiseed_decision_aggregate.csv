@@ -1,0 +1,5 @@
+protocol,model,seeds,real_rmse_mean,gain_vs_coord_percent_mean,gain_vs_coord_percent_std,gain_vs_best_control_percent_mean,soft_pass_seeds,hard_pass_seeds
+chronological,hgbdt,3,9.977104329792985,0.8500729576796994,0.01804728307628429,0.5575213489210349,0,0
+chronological,ridge,3,10.052231463151724,-0.004930491429773381,0.0,-0.03026675593845231,0,0
+leave_one_sequence_out,hgbdt,3,11.082041520113231,-0.12500938423564883,0.08063305366450982,-0.12500938423564883,0,0
+leave_one_sequence_out,ridge,3,11.423966560357433,-1.580367098173647,0.0,-1.580367098173647,0,0

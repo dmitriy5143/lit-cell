@@ -168,7 +168,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--manifest",
         type=Path,
-        default=ROOT / "tmp/deepsea_v204_drive_manifest.json",
+        default=ROOT / "evidence/data_manifests/deepsea_v204_drive_manifest.json",
     )
     parser.add_argument(
         "--output-root",

@@ -1,0 +1,3 @@
+audit,angle_radians,max_abs_error,relative_l2_error,passed_1e_10,scope
+algebraic_arbitrary_rotation,0.731,1.6653345369377348e-16,2.1038053451466884e-16,True,shared-coefficient algebraic layer
+finite_difference_grid_symmetry,3.141592653589793,0.0,0.0,True,full finite-difference vector library

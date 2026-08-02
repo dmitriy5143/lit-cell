@@ -1,5 +1,5 @@
 {
-  "confirmation_cache": "/Users/dmitrijabovskij/Desktop/Airi/outputs/lachance_track_native_v160_confirmation_cache",
+  "confirmation_cache": "<AIRI_SOURCE_ROOT>/outputs/lachance_track_native_v160_confirmation_cache",
   "confirmation_metrics_used_for_training_or_selection": false,
   "confirmation_movies": [
     10,
@@ -10,7 +10,7 @@
     15,
     16
   ],
-  "development_cache": "/Users/dmitrijabovskij/Desktop/Airi/outputs/lachance_track_native_v160_development_cache",
+  "development_cache": "<AIRI_SOURCE_ROOT>/outputs/lachance_track_native_v160_development_cache",
   "fit_movies": [
     1,
     2,
@@ -47,7 +47,7 @@
     "v193_seed_metrics.csv": "eedaf9ec53f6d561999b84550a1fd6e44893fc5c7bb87671bcee74b591c7e163",
     "v193_validation_selection.csv": "641d775e47f0910208279087e4a67a7565202a9a0501d9f4b2434c1d5532e252"
   },
-  "runner": "/Users/dmitrijabovskij/Desktop/Airi/scripts/run_lachance_confirmation_learned_comparators_v193.py",
+  "runner": "<AIRI_SOURCE_ROOT>/scripts/run_lachance_confirmation_learned_comparators_v193.py",
   "runner_sha256": "097164237a8cfd4b6385428f80077f772c6bdf806e2f699137db7c83e7bc53d1",
   "seeds": [
     7,
@@ -55,7 +55,7 @@
     123
   ],
   "three_seed_prediction_ensemble": true,
-  "v160_reference": "/Users/dmitrijabovskij/Desktop/Airi/outputs/lachance_streaming_transport_confirmation_v160_full_2026-07-27",
+  "v160_reference": "<AIRI_SOURCE_ROOT>/outputs/lachance_streaming_transport_confirmation_v160_full_2026-07-27",
   "validation_movies": [
     5
   ]

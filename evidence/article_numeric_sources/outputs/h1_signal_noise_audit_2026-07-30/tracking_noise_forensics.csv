@@ -1,0 +1,9 @@
+source,annotation_kind,quantity,value,unit
+c2c12_h1,manual,component_rmse,0.7247980833053589,px
+c2c12_h1,manual,r2,0.7057424297261963,fraction
+c2c12_reliability,manual,real_reliability_rmse_gain,3.1347195298645016,%
+c2c12_h1,automatic,component_rmse,3.474311113357544,px
+c2c12_h1,automatic,r2,0.0183748592314305,fraction
+c2c12_reliability,automatic,real_reliability_rmse_gain,5.715736937452721,%
+c2c12_paired_movie,paired,step_disagreement_median,0.7386917173862457,px
+c2c12_paired_movie,paired,step_disagreement_p90,1.8804519653320315,px

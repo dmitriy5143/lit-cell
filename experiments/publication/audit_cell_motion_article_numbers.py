@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 import numpy as np
@@ -11,7 +12,13 @@ import pandas as pd
 from scipy.stats import binomtest
 
 
-ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(
+    os.environ.get(
+        "LIT_CELL_NUMERIC_SOURCE_ROOT",
+        REPO_ROOT / "evidence" / "article_numeric_sources",
+    )
+).resolve()
 BUNDLE = ROOT / "outputs/lachance_publication_bundle_v188_2026-07-29"
 V166 = ROOT / "outputs/lachance_publication_bundle_v166_2026-07-27"
 SPATIAL = ROOT / "outputs/lachance_online_spatial_innovation_audit_v139_2026-07-22"
@@ -84,6 +91,11 @@ LIFEACT_V208_NORMALIZED = (
     / "outputs"
     / "lifeact_mdck_state_uncertainty_v208_normalized_studentt_2026-08-01"
 )
+C2C12_V209 = (
+    ROOT
+    / "outputs"
+    / "c2c12_lit_cell_external_confirmation_v209_prx_evidence_2026-08-02"
+)
 
 
 def one(df: pd.DataFrame, **filters) -> pd.Series:
@@ -104,12 +116,13 @@ def make_claim(
     source: Path,
     interpretation: str,
 ) -> dict[str, object]:
+    source_relative = source.resolve().relative_to(ROOT)
     return {
         "claim_id": claim_id,
         "quantity": quantity,
         "value": float(value),
         "unit": unit,
-        "source": str(source),
+        "source": str(Path("evidence/article_numeric_sources") / source_relative),
         "interpretation": interpretation,
         "status": "verified",
     }
@@ -172,6 +185,10 @@ def audit() -> tuple[pd.DataFrame, list[str]]:
     lifeact_uncertainty_normalized_path = (
         LIFEACT_V208_NORMALIZED / "v208_uncertainty_decision.csv"
     )
+    c2c12_metrics_path = C2C12_V209 / "v209_prx_main_metrics.csv"
+    c2c12_gains_path = C2C12_V209 / "v209_prx_experiment_gains.csv"
+    c2c12_bootstrap_path = C2C12_V209 / "v209_prx_cluster_bootstrap.csv"
+    c2c12_scales_path = C2C12_V209 / "v209_prx_operator_scale_norms.csv"
 
     benchmark = pd.read_csv(benchmark_path)
     paired = pd.read_csv(paired_path)
@@ -217,6 +234,10 @@ def audit() -> tuple[pd.DataFrame, list[str]]:
     lifeact_uncertainty_normalized = pd.read_csv(
         lifeact_uncertainty_normalized_path
     )
+    c2c12_metrics = pd.read_csv(c2c12_metrics_path)
+    c2c12_gains = pd.read_csv(c2c12_gains_path)
+    c2c12_bootstrap = pd.read_csv(c2c12_bootstrap_path)
+    c2c12_scales = pd.read_csv(c2c12_scales_path)
 
     claims: list[dict[str, object]] = []
 
@@ -1453,6 +1474,186 @@ def audit() -> tuple[pd.DataFrame, list[str]]:
             )
         )
 
+    c2_auto_h1_base = one(
+        c2c12_metrics,
+        source="automatic",
+        objective="baseline",
+        method="reliability_mean",
+        control="no_update",
+        horizon=1,
+    )
+    c2_auto_h6_base = one(
+        c2c12_metrics,
+        source="automatic",
+        objective="baseline",
+        method="reliability_mean",
+        control="no_update",
+        horizon=6,
+    )
+    c2_auto_h1_real = one(
+        c2c12_metrics,
+        source="automatic",
+        objective="horizon_balanced",
+        method="lit_cell_horizon_balanced",
+        control="real",
+        horizon=1,
+    )
+    c2_auto_h6_real = one(
+        c2c12_metrics,
+        source="automatic",
+        objective="horizon_balanced",
+        method="lit_cell_horizon_balanced",
+        control="real",
+        horizon=6,
+    )
+    c2_auto_cv_h6 = one(
+        c2c12_metrics,
+        source="automatic",
+        objective="baseline",
+        method="constant_velocity",
+        control="constant_velocity",
+        horizon=6,
+    )
+    c2_manual_h6_real = one(
+        c2c12_metrics,
+        source="manual",
+        objective="horizon_balanced",
+        method="lit_cell_horizon_balanced",
+        control="real",
+        horizon=6,
+    )
+    c2_auto_gain = c2c12_gains[
+        c2c12_gains["source"].eq("automatic")
+        & c2c12_gains["horizon"].eq(6)
+    ]
+    c2_manual_gain = c2c12_gains[
+        c2c12_gains["source"].eq("manual")
+        & c2c12_gains["horizon"].eq(6)
+    ]
+    c2_no_update = one(
+        c2c12_bootstrap,
+        annotation_kind="automatic",
+        objective="horizon_balanced",
+        horizon=6,
+        comparison="real_vs_no_update",
+    )
+    c2_wrong_cell = one(
+        c2c12_bootstrap,
+        annotation_kind="automatic",
+        objective="horizon_balanced",
+        horizon=6,
+        comparison="real_vs_wrong_cell",
+    )
+
+    for claim_id, quantity, value, unit, source, interpretation in [
+        (
+            "c2c12_auto_h1_baseline_rmse",
+            "C2C12 automatic reliability-mean h1 RMSE",
+            c2_auto_h1_base["component_rmse"],
+            "px",
+            c2c12_metrics_path,
+            "Primary automatic-track experiment-level rotations.",
+        ),
+        (
+            "c2c12_auto_h1_real_rmse",
+            "C2C12 automatic E(2)-operator h1 RMSE",
+            c2_auto_h1_real["component_rmse"],
+            "px",
+            c2c12_metrics_path,
+            "Horizon-balanced operator with a predeclared 0.5% h1 guard.",
+        ),
+        (
+            "c2c12_auto_h6_baseline_rmse",
+            "C2C12 automatic reliability-mean h6 RMSE",
+            c2_auto_h6_base["component_rmse"],
+            "px",
+            c2c12_metrics_path,
+            "Matched domain-specific conditional mean without innovation transport.",
+        ),
+        (
+            "c2c12_auto_h6_real_rmse",
+            "C2C12 automatic E(2)-operator h6 RMSE",
+            c2_auto_h6_real["component_rmse"],
+            "px",
+            c2c12_metrics_path,
+            "Three held-out experiments and 48 held-out fields in total.",
+        ),
+        (
+            "c2c12_auto_h6_real_r2",
+            "C2C12 automatic E(2)-operator h6 R2",
+            c2_auto_h6_real["r2"],
+            "fraction",
+            c2c12_metrics_path,
+            "Aggregate vector R2 for the primary automatic analysis.",
+        ),
+        (
+            "c2c12_auto_h6_paired_gain",
+            "C2C12 automatic mean paired-field h6 gain",
+            c2_auto_gain["gain_percent"].mean(),
+            "%",
+            c2c12_gains_path,
+            "Positive in all three held-out experiments.",
+        ),
+        (
+            "c2c12_auto_cv_h6_rmse",
+            "C2C12 automatic constant-velocity h6 RMSE",
+            c2_auto_cv_h6["component_rmse"],
+            "px",
+            c2c12_metrics_path,
+            "Absolute comparator remains stronger than the transferred full operator.",
+        ),
+        (
+            "c2c12_manual_h6_real_rmse",
+            "C2C12 manual E(2)-operator h6 RMSE",
+            c2_manual_h6_real["component_rmse"],
+            "px",
+            c2c12_metrics_path,
+            "Secondary observation-process audit; never pooled with automatic tracks.",
+        ),
+        (
+            "c2c12_manual_h6_paired_gain",
+            "C2C12 manual mean paired-field h6 gain",
+            c2_manual_gain["gain_percent"].mean(),
+            "%",
+            c2c12_gains_path,
+            "Most manual centroids are interpolated; observed-only gain is smaller.",
+        ),
+        (
+            "c2c12_auto_no_update_advantage",
+            "C2C12 automatic h6 advantage over no update",
+            c2_no_update["mean_advantage_px"],
+            "px",
+            c2c12_bootstrap_path,
+            "Hierarchical experiment/field bootstrap interval is strictly positive.",
+        ),
+        (
+            "c2c12_auto_wrong_cell_advantage",
+            "C2C12 automatic h6 advantage over wrong-cell transport",
+            c2_wrong_cell["mean_advantage_px"],
+            "px",
+            c2c12_bootstrap_path,
+            "Identity control; hierarchical bootstrap interval is strictly positive.",
+        ),
+        (
+            "c2c12_dominant_scale_multiplier",
+            "C2C12 dominant normalized local support scale",
+            float(str(c2c12_scales.iloc[0]["scale"]).removeprefix("m")),
+            "d_nn",
+            c2c12_scales_path,
+            "Predictive support scale, not a universal physical interaction length.",
+        ),
+    ]:
+        claims.append(
+            make_claim(
+                claim_id,
+                quantity,
+                value,
+                unit,
+                source,
+                interpretation,
+            )
+        )
+
     warnings = [
         "Коллективная добавка на h1 статистически не подтверждена: точное двустороннее p=0,84375.",
         "Эффект h6 положителен в 6/6 фильмах, но p=0,0625 после поправки Холма не пересекает порог 0,05.",
@@ -1469,6 +1670,7 @@ def audit() -> tuple[pd.DataFrame, list[str]]:
         "DeepSea v204 является частичным внешним переносом, а не положительным мультимодальным подтверждением: накопительный v166 улучшает h6 относительно постоянной скорости на 3,66%, но ухудшает h1 относительно собственного априорного прогноза; причинное состояние масок не прошло жесткие контроли.",
         "Полная v205-кривая h1--h6 содержит 11 недоминируемых точек, но только крайняя h1-точка была исходно подтверждающей. Независимый нижний предел шума локализации для LaChance не установлен.",
         "LifeAct-MDCK не улучшил условное среднее h1 в межусловной проверке. Положительный результат относится только к условному масштабу ошибки: Student-t4 NLL 3,649 -> 3,614 против 3,644 у лучшего контроля; из-за трех условий и автоматических треков он считается исследовательским.",
+        "C2C12 v209 подтверждает структурный перенос после доменного обучения, а не абсолютное лидерство или перенос весов без настройки: E(2)-оператор улучшает согласованное условное среднее на h6 на 1,22% в 3/3 экспериментах, но постоянная скорость имеет меньшую абсолютную RMSE 4,860 против 5,088. Ручные и автоматические аннотации не объединяются.",
     ]
     return pd.DataFrame(claims), warnings
 
@@ -1539,14 +1741,25 @@ def write_report(claims: pd.DataFrame, warnings: list[str], output_dir: Path) ->
                 "lifeact_uncertainty_student_coord",
                 "lifeact_uncertainty_student_control",
                 "lifeact_uncertainty_error_spearman",
+                "c2c12_auto_h1_baseline_rmse",
+                "c2c12_auto_h1_real_rmse",
+                "c2c12_auto_h6_baseline_rmse",
+                "c2c12_auto_h6_real_rmse",
+                "c2c12_auto_h6_real_r2",
+                "c2c12_auto_h6_paired_gain",
+                "c2c12_auto_cv_h6_rmse",
+                "c2c12_manual_h6_real_rmse",
+                "c2c12_manual_h6_paired_gain",
+                "c2c12_auto_no_update_advantage",
+                "c2c12_auto_wrong_cell_advantage",
+                "c2c12_dominant_scale_multiplier",
             ]
         )
     ]
     for row in selected.itertuples(index=False):
-        source = Path(row.source)
         rows.append(
             f"| `{row.claim_id}` | {row.value:.6g} | {row.unit} | "
-            f"`{source.relative_to(ROOT)}` |"
+            f"`{row.source}` |"
         )
     rows.extend(
         [
@@ -1563,7 +1776,7 @@ def main() -> None:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=ROOT / "outputs/article_numeric_audit_2026-07-30",
+        default=REPO_ROOT / "evidence" / "article_numeric_audit",
     )
     args = parser.parse_args()
     claims, warnings = audit()
