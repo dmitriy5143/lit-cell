@@ -13,6 +13,10 @@ new_data/
 *.log
 /tmp/
 /output/pdf/main_ru.*
+/output/pdf/
+/manuscript/
+/scripts/build_manuscript.py
+/scripts/validate_manuscript_pdf.py
 /output/reproduction_smoke/
 /evidence/publication_release_validation.json
 /evidence/manuscript_pdf_validation.json

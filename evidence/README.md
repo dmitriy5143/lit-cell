@@ -8,8 +8,8 @@ or checkpoints.
 - `deepsea_v204/`: partial transfer and morphology-state gates on DeepSea.
 - `h1_v205/`: nearest-step scale, localization, Pareto, and causal-control audit.
 - `lifeact_v206_v208/`: segmentation identity, cell-state, and uncertainty gates.
-- `article_numeric_audit/`: machine-readable registered claims used by the
-  manuscript checker.
+- `article_numeric_audit/`: machine-readable registered quantitative claims and
+  their source artifacts.
 - `figure_sources/`: compact tables required to reconstruct plots.
 - `architecture_search_ledger.csv`: branch-level result and decision ledger.
 - `raw_context_v2_source_dictionary.csv`: source-column dictionary for the

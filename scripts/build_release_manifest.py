@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a portable SHA-256 manifest for committed publication artifacts."""
+"""Build a portable SHA-256 manifest for the public LIT-Cell release."""
 
 from __future__ import annotations
 
@@ -15,7 +15,8 @@ EXCLUDED = {
     ROOT / "evidence" / "publication_release_validation.json",
     ROOT / "evidence" / "manuscript_pdf_validation.json",
     ROOT / "evidence" / "v188" / "v188_validation_report.json",
-    ROOT / "output" / "pdf" / "main_ru.pdf",
+    ROOT / "scripts" / "build_manuscript.py",
+    ROOT / "scripts" / "validate_manuscript_pdf.py",
 }
 
 
@@ -33,8 +34,6 @@ def selected_files() -> list[Path]:
         ROOT / "docs",
         ROOT / "src" / "lit_cell_forecasting",
         ROOT / "experiments" / "publication",
-        ROOT / "manuscript",
-        ROOT / "output" / "pdf",
         ROOT / "scripts",
         ROOT / "tests",
     ]

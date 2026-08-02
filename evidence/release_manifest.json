@@ -10,12 +10,12 @@
       "sha256": "207c01d985c9967ba166e7d4a3a98a174833ad78a9432628094069b348c90228"
     },
     "README.md": {
-      "bytes": 5384,
-      "sha256": "a6dcb4e710d5d90ec286286fa4989c46655957e3c2e3c61e4d46c3bd24c1e6b1"
+      "bytes": 5211,
+      "sha256": "4cee982901d4daae6a54d01190caf9fdf04bfc7e4224ccebe070e281746a6e4b"
     },
     "REPRODUCIBILITY.md": {
-      "bytes": 11485,
-      "sha256": "55541b634590df6fd2ec2f4d487187754e491f7388e12c579f3a4b74685f2657"
+      "bytes": 10537,
+      "sha256": "6b99624567410e77620dfc0e5c9d59370e9788e07351dd3c4a256dac092ea490"
     },
     "docs/ARCHITECTURE.md": {
       "bytes": 4021,
@@ -38,8 +38,8 @@
       "sha256": "0fbba760b55dcfad7d5cc05d47ba9670141146b5c0a4f09c560edb775545df32"
     },
     "evidence/README.md": {
-      "bytes": 1323,
-      "sha256": "87afe6a13b98e89187f94efe806d95371d347fef65b37a0f5bebb2a37f397ce0"
+      "bytes": 1332,
+      "sha256": "3866405fbada6629853e29afc9b995c51e124aecf5f1be6f428198c05824a4d6"
     },
     "evidence/architecture_search_ledger.csv": {
       "bytes": 5042,
@@ -837,102 +837,6 @@
       "bytes": 19976,
       "sha256": "05acadfc7cfcc2d4c066db5b8a474babca90ee666f1c9df87b2534b739f15cf9"
     },
-    "manuscript/README.md": {
-      "bytes": 1068,
-      "sha256": "38b43e86b6c04d1d975b74ccd8ce5af2e13d836490c1e966935fca74832b6e11"
-    },
-    "manuscript/audit_cell_motion_latex_figures.py": {
-      "bytes": 9766,
-      "sha256": "b5b7768c37a583c0ddb559168a0b3ce7024954def701b216bfa5f688dd4ef63b"
-    },
-    "manuscript/build_cell_motion_latex_figures.py": {
-      "bytes": 38581,
-      "sha256": "f12e571ad52fd122dac10e72a68b06ae4d972387a5824f0718fffb24c019dd5d"
-    },
-    "manuscript/build_h1_pareto_figure.py": {
-      "bytes": 4963,
-      "sha256": "de0ea9c0aa9156909c442bcc0c02028810de00956f0b5fed4f3ba5b3e00ef7f2"
-    },
-    "manuscript/build_prx_equivariant_field_figure_v197.py": {
-      "bytes": 8646,
-      "sha256": "edc7b00c9d5fe8e9f0012790afd058ee1c6b160ee0586dd0b6daf770532c28c4"
-    },
-    "manuscript/figures/fig1_real_cells_graph.pdf": {
-      "bytes": 133189,
-      "sha256": "5aa1c94f0fac3dc8dd0c45221f1d57587a126e9443c50375c48cb0336ad0a444"
-    },
-    "manuscript/figures/fig1_real_cells_graph.png": {
-      "bytes": 509493,
-      "sha256": "a053a277939463c94cd7b7a559bc9445f2d5ec36ff7a647410723c89add84820"
-    },
-    "manuscript/figures/fig2_architecture.pdf": {
-      "bytes": 62205,
-      "sha256": "8ffffe52794d432878b0d884b8b22b00ed642c736ae2b6c841937a67c7117c3b"
-    },
-    "manuscript/figures/fig2_architecture.png": {
-      "bytes": 186012,
-      "sha256": "85a4ba61200bb869e45d2b2b1d0aa7ed10afa3be359f344d9726a58b02fbdb6f"
-    },
-    "manuscript/figures/fig3_innovation_evidence.pdf": {
-      "bytes": 39899,
-      "sha256": "979924d2f33bf71b0466aa0af655aee55cc189d4fc3659bc8806f66ee13515a3"
-    },
-    "manuscript/figures/fig3_innovation_evidence.png": {
-      "bytes": 225238,
-      "sha256": "377c70f0b3f6c285fdd8b3fc1c6efa0dd8c9112c1e5863701b94dbe312ab1e31"
-    },
-    "manuscript/figures/fig4_primary_results.pdf": {
-      "bytes": 40677,
-      "sha256": "403264ff816af35a1f72f6adc7931a57dd7b6f19d7d50fe9cb579f1cf01ac80a"
-    },
-    "manuscript/figures/fig4_primary_results.png": {
-      "bytes": 220250,
-      "sha256": "4fd68b1030855731901ca65fb89cf7675a62b854f78a256bcbc2351fb27bb4dd"
-    },
-    "manuscript/figures/fig5_robustness_calibration.pdf": {
-      "bytes": 36170,
-      "sha256": "2a5fa7882f594ad5ced8b4a25eddf1aa7a8b691c20a62d2ad20a15e44e5bd3f6"
-    },
-    "manuscript/figures/fig5_robustness_calibration.png": {
-      "bytes": 181679,
-      "sha256": "53b41bf90278da38dcb080b8c6255e4b69ba5fd3a88e1ff8af8c2b9a83c16d0c"
-    },
-    "manuscript/figures/fig6_field_sparse_operator.pdf": {
-      "bytes": 55962,
-      "sha256": "999e91c3f57a9381d64ad92d1f918b5d7206ac5f71aad30edbf17ab190bb08cd"
-    },
-    "manuscript/figures/fig6_field_sparse_operator.png": {
-      "bytes": 361317,
-      "sha256": "611bf0c73fb250009f3387e86e283abe65e6eaaa3f1c21d992f54a359317695f"
-    },
-    "manuscript/figures/fig7_equivariant_field_law.pdf": {
-      "bytes": 48316,
-      "sha256": "fc05df54125854fa404497eba66e01295dac9cffce5b6f69acffdff00a83571a"
-    },
-    "manuscript/figures/fig7_equivariant_field_law.png": {
-      "bytes": 288087,
-      "sha256": "59ddc94f5af427dd0c40d71a2c589de680002bfcd8153657899c3633d1294f5c"
-    },
-    "manuscript/figures/fig8_h1_pareto_evidence.pdf": {
-      "bytes": 44312,
-      "sha256": "3dea246673eac97006e03347793a4e5a2981d73e7f2032a39df019ce53391403"
-    },
-    "manuscript/figures/fig8_h1_pareto_evidence.png": {
-      "bytes": 213108,
-      "sha256": "4e1677d2a40075b98d23ec11607dc978a2f8733e430f1a5e4bcd2333d37a37a2"
-    },
-    "manuscript/main_ru.tex": {
-      "bytes": 202626,
-      "sha256": "96792efffa92d4dd8d993b1fad528b4511f590897d8226a65c0b7094e92c82a3"
-    },
-    "manuscript/supplement/supplement_ru.md": {
-      "bytes": 68689,
-      "sha256": "4519f24c42dd7e2e1b822ca03dc71f391b505cd68018f91f800fbc7e413fba7c"
-    },
-    "output/pdf/sequential_cell_motion_forecasting_ru.pdf": {
-      "bytes": 716260,
-      "sha256": "08534ffef192955f1a371d71336e7080f83cacaacc63a3e5571f350fffe083f5"
-    },
     "pyproject.toml": {
       "bytes": 777,
       "sha256": "107ba4c6be82df120ba9d633f3eb01acb776794d2c3c113af602a4f1b9aaa8aa"
@@ -949,13 +853,9 @@
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
-    "scripts/build_manuscript.py": {
-      "bytes": 2530,
-      "sha256": "ceff2d04ed670ad3aa36d8d3d7bd6fbcebd31258790ad90e09011c8a49d91d3c"
-    },
     "scripts/build_release_manifest.py": {
-      "bytes": 2436,
-      "sha256": "cdcd6514bd5f04805fa744fed1d1f1cdc033a5e1eae52978c6188070e83168d0"
+      "bytes": 2424,
+      "sha256": "6b0db4d907f94924ac07a04fd0a34d6f078e3d6d02d4cc6463627240f588f615"
     },
     "scripts/export_feature_dictionary.py": {
       "bytes": 2921,
@@ -1013,13 +913,9 @@
       "bytes": 1953,
       "sha256": "9ab09b1d1f8304b634705d89f7d917f0519b597109fdae373eedb9db97956ebd"
     },
-    "scripts/validate_manuscript_pdf.py": {
-      "bytes": 5559,
-      "sha256": "dc209d20db2fd374d45e24f0711302cfc3a0c552c27579a41fab8a94a68e876b"
-    },
     "scripts/validate_publication_release.py": {
-      "bytes": 16705,
-      "sha256": "46aa8344184ac32edc063197cd37f5837deb9bdf68a710fccd402227db7d19ce"
+      "bytes": 15040,
+      "sha256": "47e3b6beb259d86d21362089c32f1b454612d2b1237a5ebb25757d96bb941eaf"
     },
     "src/lit_cell_forecasting/__init__.py": {
       "bytes": 659,

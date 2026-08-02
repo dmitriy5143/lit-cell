@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the portable publication release and registered manuscript claims."""
+"""Validate the portable LIT-Cell method release and registered evidence."""
 
 from __future__ import annotations
 
@@ -12,12 +12,10 @@ import tomllib
 from pathlib import Path
 
 import pandas as pd
-from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "evidence"
-MANUSCRIPT = ROOT / "manuscript" / "main_ru.tex"
 REPORT = EVIDENCE / "publication_release_validation.json"
 
 
@@ -170,24 +168,7 @@ def validate_comparators(checks: list[str]) -> None:
     )
 
 
-def validate_manuscript(checks: list[str]) -> None:
-    text = MANUSCRIPT.read_text(encoding="utf-8")
-    required_tokens = [
-        "3,474", "5,501", "4,820", "0{,}938", "0{,}952",
-        "0{,}0625", "3,649", "3,614", "3,644", r"20\,000",
-    ]
-    for token in required_tokens:
-        require(token in text, f"manuscript contains registered token {token}", checks)
-    forbidden = [r"v166", r"v97", r"HGBDT v52", r"p_\{97\}", "производствен"]
-    for token in forbidden:
-        require(re.search(token, text, flags=re.IGNORECASE) is None, f"manuscript omits internal term {token}", checks)
-    require("Holm" in text and "H1" in text and "H2" in text, "manuscript states multiplicity family", checks)
-    require("глобальное превосходство" in text, "manuscript limits global-SOTA claim", checks)
-    require("LIT-Cell" in text, "manuscript uses the canonical LIT-Cell name", checks)
-    require("tab:comparator_scope" in text, "manuscript declares comparator protocol tiers", checks)
-
-
-def validate_features_and_figures(checks: list[str]) -> None:
+def validate_features_and_search_ledger(checks: list[str]) -> None:
     dictionary = pd.read_csv(EVIDENCE / "raw_context_v2_source_dictionary.csv")
     contract = json.loads((EVIDENCE / "raw_context_v2_feature_contract.json").read_text(encoding="utf-8"))
     require(len(dictionary) == 1019, "source feature dictionary has the exact 1,019 final columns", checks)
@@ -229,15 +210,6 @@ def validate_features_and_figures(checks: list[str]) -> None:
     ledger = pd.read_csv(EVIDENCE / "architecture_search_ledger.csv")
     require(len(ledger) >= 15, "architecture search ledger covers at least 15 branches", checks)
     require(ledger["branch"].is_unique, "architecture search branches are unique", checks)
-
-    for index in range(1, 9):
-        pdfs = list((ROOT / "manuscript" / "figures").glob(f"fig{index}_*.pdf"))
-        require(len(pdfs) == 1 and pdfs[0].stat().st_size > 10_000, f"Figure {index} PDF exists", checks)
-        pngs = list((ROOT / "manuscript" / "figures").glob(f"fig{index}_*.png"))
-        require(len(pngs) == 1, f"Figure {index} PNG preview exists", checks)
-        with Image.open(pngs[0]) as image:
-            require(image.width >= 1200 and image.height >= 650, f"Figure {index} raster is publication-sized", checks)
-
 
 def validate_code_layout(checks: list[str]) -> None:
     runners = sorted((ROOT / "experiments" / "publication").glob("*.py"))
@@ -300,8 +272,7 @@ def main() -> None:
     validate_confirmation_and_external(checks)
     validate_late_evidence(checks)
     validate_comparators(checks)
-    validate_manuscript(checks)
-    validate_features_and_figures(checks)
+    validate_features_and_search_ledger(checks)
     validate_code_layout(checks)
     validate_identity(checks)
     payload = {"status": "PASS", "checks": len(checks), "details": checks}

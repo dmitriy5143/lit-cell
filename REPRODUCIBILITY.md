@@ -2,15 +2,12 @@
 
 ## What Is Reproducible Here
 
-The repository provides three explicitly different levels of reproducibility:
+The repository provides two explicitly different levels of reproducibility:
 
 1. **Artifact verification without raw data.** Frozen CSV/JSON evidence can be
    checked for schema, internal consistency, protocol identity, and registered
    headline numbers.
-2. **Figure and manuscript reconstruction.** Publication figures and the PDF can
-   be rebuilt from committed evidence, except Figure 1, which requires the raw
-   LaChance movie stack for the microscopy background.
-3. **Raw-data and publication-scale re-execution.** A frozen preparation
+2. **Raw-data and publication-scale re-execution.** A frozen preparation
    pipeline reconstructs the tracking-aligned 1,019-column causal grid from the
    licensed LaChance track tables and raw MDCK Bulk movie archive. The outer
    leave-one-movie-out orchestrator then rebuilds fold-local anchors, trains the
@@ -162,8 +159,8 @@ The validator checks:
 - causal control direction and movie coverage;
 - external-domain result schemas;
 - late DeepSea, h1, and LifeAct evidence;
-- numbers embedded in the manuscript;
-- existence and dimensions of publication figures.
+- the exact feature-preparation contract and dependency closure;
+- registered comparator tiers and canonical project identity.
 
 The older `v188` validator is retained as a provenance check. Its
 `--require-publication-ready` flag intentionally reports historical packaging
@@ -263,43 +260,6 @@ or fold reuse; do not infer completion from a partially populated output folder.
 Comparator tiers and the prohibition on pooling open-loop and streaming values
 are documented in `docs/COMPARATORS.md` and encoded in
 `evidence/comparators/comparator_protocol_matrix.csv`.
-
-## Build the Manuscript
-
-Figures 1-6:
-
-```bash
-LACHANCE_DATA_ROOT="$LACHANCE_DATA_ROOT" \
-  python manuscript/build_cell_motion_latex_figures.py
-```
-
-Mechanistic field figure and the h1/h6 trade-off figure:
-
-```bash
-python manuscript/build_prx_equivariant_field_figure_v197.py
-python manuscript/build_h1_pareto_figure.py
-```
-
-Figure checks:
-
-```bash
-python manuscript/audit_cell_motion_latex_figures.py
-```
-
-PDF:
-
-```bash
-python scripts/build_manuscript.py
-```
-
-The publication QA script renders every page and checks A4 dimensions, embedded
-fonts, expected sections, raster dimensions, replacement glyphs, blank pages,
-and critical LaTeX layout warnings:
-
-```bash
-python scripts/validate_manuscript_pdf.py \
-  output/pdf/sequential_cell_motion_forecasting_ru.pdf
-```
 
 ## Statistical Unit and Multiplicity
 

@@ -1,9 +1,9 @@
 # LIT-Cell: Local Innovation Transport for Cell Motion
 
 **LIT-Cell** is the canonical name of the method and software described here.
-This repository contains its experiment runners, frozen evidence, and
-Russian-language manuscript for causal online forecasting of collective cell
-motion. A prediction for transition `t -> t+1` is committed before frame
+This repository contains its experiment runners, frozen evidence, and reusable
+implementation for causal online forecasting of collective cell motion. A
+prediction for transition `t -> t+1` is committed before frame
 `t+1` is observed. Once that transition is complete, its innovation and the
 completed innovations of nearby cells may update the next forecast.
 
@@ -21,7 +21,7 @@ fully observed before the next prediction was issued.
 ## Main Results
 
 All values below use movie-level outer evaluation and the streaming/receding-h1
-protocol described in the manuscript.
+protocol frozen in the evidence contract.
 
 | Evaluation | Operating point | h1 RMSE | h6 RMSE | h6 R2 | Main comparison |
 |---|---|---:|---:|---:|---|
@@ -47,9 +47,6 @@ online observation schedule, split unit, and metric.
 - `experiments/history/`: index of rejected or diagnostic architecture branches.
 - `evidence/`: frozen result tables, protocol contracts, control outcomes, and
   claim-scope ledgers. Raw microscopy data and checkpoints are not committed.
-- `manuscript/`: LaTeX source, supplementary material, figure builders, and
-  publication figures.
-- `output/pdf/`: rendered manuscript after publication quality assurance.
 - `scripts/run_sequential_cell_forecasting.py`: descriptive dispatcher for the
   principal publication workflows.
 - `scripts/prepare_lit_cell_features.py`: frozen raw-microscopy-to-feature-grid
@@ -67,7 +64,7 @@ python -m pip install -r requirements.txt
 python -m pip install -e . --no-deps
 ```
 
-Validate the frozen evidence and manuscript claims without the raw data:
+Validate the frozen evidence and registered claims without the raw data:
 
 ```bash
 python scripts/validate_publication_release.py
