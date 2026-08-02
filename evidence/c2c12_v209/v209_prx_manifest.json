@@ -1,0 +1,49 @@
+{
+  "automatic_h1_error_change_percent": 0.3951517234385422,
+  "automatic_h6_gain_percent": 1.220684574898085,
+  "decision": "external_structural_pass_not_absolute_leaderboard_win",
+  "manual_h1_error_change_percent": 0.11007752945409381,
+  "manual_h6_gain_percent": 11.395594390937399,
+  "outputs": [
+    "v209_prx_causal_audit.csv",
+    "v209_prx_cluster_bootstrap.csv",
+    "v209_prx_decision_report.md",
+    "v209_prx_density_strata.csv",
+    "v209_prx_experiment_gains.csv",
+    "v209_prx_free_vs_equivariant.csv",
+    "v209_prx_main_metrics.csv",
+    "v209_prx_manifest.json",
+    "v209_prx_operator_coefficients.csv",
+    "v209_prx_operator_scale_norms.csv",
+    "v209_prx_tracking_quality.csv"
+  ],
+  "primary_operating_point": "horizon_balanced",
+  "primary_operator": "E(2)-equivariant scalar vector transport",
+  "schema": "c2c12_lit_cell_prx_evidence_v209",
+  "source_files": {
+    "outputs/c2c12_lit_cell_external_confirmation_v209_automatic_equivariant_full_2026-08-02/v209_cluster_bootstrap.csv": {
+      "bytes": 590,
+      "sha256": "02944fb62425a39ad93e16cbdc8946db5cfd65a5d30ce3466357bae197cf8ca5"
+    },
+    "outputs/c2c12_lit_cell_external_confirmation_v209_automatic_equivariant_full_2026-08-02/v209_field_metrics.csv": {
+      "bytes": 597437,
+      "sha256": "4d42f17fc4e8c4e0a996d066267f718e7bece29c8015bfd2614b79489be728b9"
+    },
+    "outputs/c2c12_lit_cell_external_confirmation_v209_automatic_equivariant_full_2026-08-02/v209_operator_coefficients.csv": {
+      "bytes": 4297,
+      "sha256": "a5c8bba2cbf15c4630a361c57c48c0a3f93e6ed6189bcdd975e0df3c7c7f055c"
+    },
+    "outputs/c2c12_lit_cell_external_confirmation_v209_automatic_full_balanced_2026-08-02/v209_field_metrics.csv": {
+      "bytes": 1009345,
+      "sha256": "dce9abea76f2542221b6facb9a9f30c0390c9449798351bbd384710d2ff97349"
+    },
+    "outputs/c2c12_lit_cell_external_confirmation_v209_manual_equivariant_full_2026-08-02/v209_cluster_bootstrap.csv": {
+      "bytes": 578,
+      "sha256": "c7a70e1fc85a4ffa9abf82c10832a7040ab4ede23f9c157638dca4414330bc97"
+    },
+    "outputs/c2c12_lit_cell_external_confirmation_v209_manual_equivariant_full_2026-08-02/v209_field_metrics.csv": {
+      "bytes": 595041,
+      "sha256": "24c1e13049b2b40011685656bc73fa74699d7ce137c89cf0877eccba3adec6e7"
+    }
+  }
+}
