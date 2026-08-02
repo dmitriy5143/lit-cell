@@ -11,6 +11,9 @@
   the registered tolerance and scales near-linearly in the measured regime.
 - A compact E(2)-equivariant operator explains most of the dense correction's
   gain on MDCK and survives wrong-cell and stale-time controls.
+- On C2C12 automatic tracks, an E(2)-equivariant completed-innovation operator
+  improves its matched reliability-aware mean at rolling h6 in all three
+  held-out experiments and survives own-only, wrong-cell, and stale controls.
 - Student-t and fold-external calibration provide useful uncertainty estimates.
 
 ## Supported with Qualifications
@@ -23,6 +26,10 @@
   each domain; they are not zero-shot transfer of all learned weights.
 - DeepSea is a partial cross-dataset transfer. LifeAct has only three independent
   conditions and supports an uncertainty-scale signal, not a mean correction.
+- C2C12 is a structural transfer after domain-specific fitting. Its automatic
+  h6 gain over the matched reliability mean is 1.22%, while constant velocity
+  remains better in absolute h6 RMSE; manual tracks are dominated by
+  interpolation and are reported separately.
 
 ## Not Supported
 
@@ -33,6 +40,8 @@
 - a causal conditional-mean benefit from raw video, masks, morphology, or direct
   mechanical measurements in the final LaChance model;
 - use of a fixed-origin candidate oracle as a lower bound for streaming h6.
+- an absolute C2C12 state-of-the-art claim or pooling of manual and automatic
+  C2C12 annotations.
 
 ## Recommended One-Sentence Positioning
 

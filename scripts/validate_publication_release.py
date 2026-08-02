@@ -117,6 +117,91 @@ def validate_late_evidence(checks: list[str]) -> None:
     require(close(row.best_control_student_t4_nll, 3.644185), "LifeAct best-control Student-t4 NLL matches", checks)
 
 
+def validate_c2c12_external(checks: list[str]) -> None:
+    root = EVIDENCE / "c2c12_v209"
+    metrics = pd.read_csv(root / "v209_prx_main_metrics.csv")
+    auto_h1 = one(
+        metrics,
+        source="automatic",
+        objective="horizon_balanced",
+        control="real",
+        horizon=1,
+    )
+    auto_h6 = one(
+        metrics,
+        source="automatic",
+        objective="horizon_balanced",
+        control="real",
+        horizon=6,
+    )
+    manual_h6 = one(
+        metrics,
+        source="manual",
+        objective="horizon_balanced",
+        control="real",
+        horizon=6,
+    )
+    cv_h6 = one(
+        metrics,
+        source="automatic",
+        objective="baseline",
+        method="constant_velocity",
+        horizon=6,
+    )
+    require(close(auto_h1.component_rmse, 4.355146), "C2C12 automatic h1 RMSE matches", checks)
+    require(close(auto_h6.component_rmse, 5.088459), "C2C12 automatic h6 RMSE matches", checks)
+    require(close(manual_h6.component_rmse, 1.334696), "C2C12 manual h6 RMSE matches", checks)
+    require(float(cv_h6.component_rmse) < float(auto_h6.component_rmse), "C2C12 evidence preserves the constant-velocity limitation", checks)
+
+    gains = pd.read_csv(root / "v209_prx_experiment_gains.csv")
+    auto_gain = gains[
+        gains["source"].eq("automatic") & gains["horizon"].eq(6)
+    ]
+    require(len(auto_gain) == 3, "C2C12 automatic h6 covers three held-out experiments", checks)
+    require(auto_gain["gain_percent"].gt(0).all(), "C2C12 automatic h6 gain is positive in 3/3 experiments", checks)
+
+    bootstrap = pd.read_csv(root / "v209_prx_cluster_bootstrap.csv")
+    automatic = bootstrap[
+        bootstrap["annotation_kind"].eq("automatic")
+        & bootstrap["objective"].eq("horizon_balanced")
+    ]
+    require(len(automatic) == 4, "C2C12 automatic bootstrap includes four registered comparisons", checks)
+    require(automatic["ci_low"].gt(0).all(), "C2C12 automatic clustered intervals are positive", checks)
+
+    density = pd.read_csv(root / "v209_prx_density_strata.csv")
+    auto_density_h6 = density[
+        density["source"].eq("automatic") & density["horizon"].eq(6)
+    ]
+    require(len(auto_density_h6) == 4, "C2C12 h6 covers four density strata", checks)
+    require(auto_density_h6["gain_percent"].gt(0).all(), "C2C12 h6 gain is positive in every density stratum", checks)
+
+    quality = pd.read_csv(root / "v209_prx_tracking_quality.csv")
+    observed_manual = one(
+        quality,
+        source="manual",
+        horizon=6,
+        quality_stratum="observed_only",
+    )
+    require(float(observed_manual.gain_percent) > 0, "C2C12 observed-only manual h6 gain remains positive", checks)
+
+    operator = pd.read_csv(root / "v209_prx_free_vs_equivariant.csv")
+    free = one(operator, operator="free", control="real", horizon=6)
+    equivariant = one(operator, operator="equivariant", control="real", horizon=6)
+    relative = abs(float(free.component_rmse) - float(equivariant.component_rmse)) / float(free.component_rmse)
+    require(relative < 0.0001, "C2C12 E(2)-equivariant operator matches the free regression", checks)
+    scales = pd.read_csv(root / "v209_prx_operator_scale_norms.csv")
+    require(scales.iloc[0]["scale"] == "m2", "C2C12 dominant normalized local scale is 2 d_nn", checks)
+
+    causal = pd.read_csv(root / "v209_prx_causal_audit.csv")
+    violation_columns = [
+        "future_donor_violations",
+        "stale_donor_violations",
+        "split_key_overlap",
+        "target_feature_flags",
+    ]
+    require(causal[violation_columns].sum().sum() == 0, "C2C12 causal and split audits have zero violations", checks)
+
+
 def validate_comparators(checks: list[str]) -> None:
     root = EVIDENCE / "comparators"
     aggregate = pd.read_csv(root / "online_confirmation_aggregate.csv")
@@ -271,6 +356,7 @@ def main() -> None:
     validate_primary(checks)
     validate_confirmation_and_external(checks)
     validate_late_evidence(checks)
+    validate_c2c12_external(checks)
     validate_comparators(checks)
     validate_features_and_search_ledger(checks)
     validate_code_layout(checks)

@@ -105,6 +105,47 @@ All normalizers, feature filters, route labels, and calibration parameters are
 fit without the outer test movie. The test target is used only after a prediction
 has been committed.
 
+## C2C12 External Structural Validation
+
+The C2C12 phase-contrast corpus is a separate structural validation. Prepare 48
+automatic and 48 manual track tables under:
+
+```text
+$C2C12_TABLE_ROOT/
+  C2C12_Automatic/C2C12_Automatic_1??_tracks.csv
+  C2C12_Automatic/C2C12_Automatic_2??_tracks.csv
+  C2C12_Automatic/C2C12_Automatic_3??_tracks.csv
+  C2C12_Manual/C2C12_Manual_1??_tracks.csv
+  C2C12_Manual/C2C12_Manual_2??_tracks.csv
+  C2C12_Manual/C2C12_Manual_3??_tracks.csv
+```
+
+Each pattern must resolve to 16 complete fields. The independent outer units
+are experiments 1, 2, and 3, rotated as train/validation/test. Automatic and
+manual annotations are never pooled. Run the primary E(2)-equivariant analysis:
+
+```bash
+python experiments/publication/run_c2c12_lit_cell_external_confirmation_v209.py \
+  --table-root "$C2C12_TABLE_ROOT" \
+  --kinds automatic \
+  --objectives horizon_balanced \
+  --operator-kind equivariant \
+  --out-dir /absolute/path/to/c2c12_v209_automatic
+
+python experiments/publication/run_c2c12_lit_cell_external_confirmation_v209.py \
+  --table-root "$C2C12_TABLE_ROOT" \
+  --kinds manual \
+  --objectives horizon_balanced \
+  --operator-kind equivariant \
+  --out-dir /absolute/path/to/c2c12_v209_manual
+```
+
+The automatic primary gate requires positive h6 gain in all three held-out
+experiments, h1 degradation no greater than 0.5%, a full-operator advantage
+over own-only, wrong-cell, and stale-time controls, and zero causal donor
+violations. Manual tracks are a secondary audit because most centroids are
+interpolated. Compact frozen outputs are in `evidence/c2c12_v209/`.
+
 ## Rebuild the Causal Feature Grid
 
 The raw MDCK Bulk archive is file
@@ -159,6 +200,7 @@ The validator checks:
 - causal control direction and movie coverage;
 - external-domain result schemas;
 - late DeepSea, h1, and LifeAct evidence;
+- C2C12 experiment-external transport, controls, and observation-quality strata;
 - the exact feature-preparation contract and dependency closure;
 - registered comparator tiers and canonical project identity.
 
@@ -223,6 +265,7 @@ python scripts/run_sequential_cell_forecasting.py --list
 python scripts/run_sequential_cell_forecasting.py online-core -- --help
 python scripts/run_sequential_cell_forecasting.py fold-local-transport -- --help
 python scripts/run_sequential_cell_forecasting.py frozen-confirmation -- --help
+python scripts/run_sequential_cell_forecasting.py c2c12-external -- --help
 ```
 
 Main stages:
@@ -251,6 +294,9 @@ learned-comparators
 
 field-law / graph-bridge / field-dynamics
   E(2)-equivariant operator, graph surrogate and effective functional analyses
+
+c2c12-external
+  experiment-external C2C12 structural validation with automatic/manual tracks
 ```
 
 Each runner exposes its exact required caches and paths through `--help`. Long

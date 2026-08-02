@@ -8,6 +8,9 @@ or checkpoints.
 - `deepsea_v204/`: partial transfer and morphology-state gates on DeepSea.
 - `h1_v205/`: nearest-step scale, localization, Pareto, and causal-control audit.
 - `lifeact_v206_v208/`: segmentation identity, cell-state, and uncertainty gates.
+- `c2c12_v209/`: experiment-external automatic/manual structural validation,
+  E(2)-equivariant operator coefficients, hard controls, density/quality strata,
+  and the explicit non-leaderboard interpretation boundary.
 - `article_numeric_audit/`: machine-readable registered quantitative claims and
   their source artifacts.
 - `figure_sources/`: compact tables required to reconstruct plots.

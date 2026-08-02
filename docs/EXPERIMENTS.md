@@ -28,6 +28,8 @@ workspace. Scientific names in the manuscript are deliberately version-free.
 | LifeAct segmentation/identity gate | `run_lifeact_mdck_segmentation_identity_gate_v206.py` | `evidence/lifeact_v206_v208/` |
 | LifeAct state and uncertainty | `run_lifeact_mdck_mechanochemical_state_gate_v207.py` | `evidence/lifeact_v206_v208/` |
 | LifeAct uncertainty closure | `evaluate_lifeact_mdck_state_uncertainty_gate_v208.py` | `evidence/lifeact_v206_v208/` |
+| C2C12 reliability-aware conditional mean | `run_c2c12_reliability_transport_v168.py` | incorporated in the v209 outer rotations |
+| C2C12 experiment-external innovation transport | `run_c2c12_lit_cell_external_confirmation_v209.py` | `evidence/c2c12_v209/` |
 
 ## Evidence Classes
 
@@ -46,6 +48,12 @@ reproducibility, not zero-shot weight transfer.
 **Mechanistic/exploratory.** Field, potential, visual, mechanical, and modality
 experiments test interpretation or observability. Their controls are important,
 but they do not enlarge the confirmatory H1/H2 family after the fact.
+
+**External structural validation.** C2C12 uses three microscopy experiments as
+rotating train/validation/test units. Automatic tracks are primary and manual
+tracks are a separate observation-process audit. This validates reuse of the
+delayed local-innovation operator after domain-specific fitting; it is neither
+zero-shot weight transfer nor an absolute C2C12 leaderboard claim.
 
 ## Historical Search
 

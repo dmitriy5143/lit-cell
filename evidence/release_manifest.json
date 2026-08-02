@@ -10,36 +10,36 @@
       "sha256": "207c01d985c9967ba166e7d4a3a98a174833ad78a9432628094069b348c90228"
     },
     "README.md": {
-      "bytes": 5211,
-      "sha256": "4cee982901d4daae6a54d01190caf9fdf04bfc7e4224ccebe070e281746a6e4b"
+      "bytes": 5776,
+      "sha256": "fa961c910cbe9406fd56a8268073eee8762531556bcc6d5f51301217dd244482"
     },
     "REPRODUCIBILITY.md": {
-      "bytes": 10537,
-      "sha256": "6b99624567410e77620dfc0e5c9d59370e9788e07351dd3c4a256dac092ea490"
+      "bytes": 12390,
+      "sha256": "a7a67d9f4393e02db3e44b6e0f64cfae69d1e619b6885df346c0780884f95e22"
     },
     "docs/ARCHITECTURE.md": {
       "bytes": 4021,
       "sha256": "93cb99aae59354e1654707770c37880f80dfd3b7a673ead14671343081b9571f"
     },
     "docs/CLAIM_SCOPE.md": {
-      "bytes": 2236,
-      "sha256": "9e914109e1642b254c904e0e97836420b72ef41509cbea82cffcf9fb36c9607b"
+      "bytes": 2835,
+      "sha256": "ac8c6a243cbc8bc9e53fa6c130d866e21913985821027b38cdc1655dcd0cc8a4"
     },
     "docs/COMPARATORS.md": {
       "bytes": 1924,
       "sha256": "faba32ddae964aeb18488d2afa114e8766412205c11749165115c7017652e612"
     },
     "docs/EXPERIMENTS.md": {
-      "bytes": 4408,
-      "sha256": "5d90b9b2617f24f05077a47f0d20692e7ac1d309d76e1176a429c619dd952d98"
+      "bytes": 5050,
+      "sha256": "6e1e05af4cb56fbd8f814cbbda90f0fb34ebf120bcc61e980d49839f659d33b1"
     },
     "docs/NAMING.md": {
       "bytes": 865,
       "sha256": "0fbba760b55dcfad7d5cc05d47ba9670141146b5c0a4f09c560edb775545df32"
     },
     "evidence/README.md": {
-      "bytes": 1332,
-      "sha256": "3866405fbada6629853e29afc9b995c51e124aecf5f1be6f428198c05824a4d6"
+      "bytes": 1550,
+      "sha256": "f78a25796739053e2de34e3e19d98f4e807302358336bf070be3cbae545c4c70"
     },
     "evidence/architecture_search_ledger.csv": {
       "bytes": 5042,
@@ -52,6 +52,50 @@
     "evidence/article_numeric_audit/article_numeric_claims.csv": {
       "bytes": 79919,
       "sha256": "9bdd248feb7412546487b51b5fd5d522613d4e049514f69284ef7475fe5e8b19"
+    },
+    "evidence/c2c12_v209/v209_prx_causal_audit.csv": {
+      "bytes": 175,
+      "sha256": "fb4909f74df93bfc67c4089e3f3282d8c6a9a50afdd51b567117fedb92f30cc1"
+    },
+    "evidence/c2c12_v209/v209_prx_cluster_bootstrap.csv": {
+      "bytes": 1012,
+      "sha256": "9fea79e4a49c51e815fa5ae95b40b93e83ef07c1c8745804474706b2d74f253c"
+    },
+    "evidence/c2c12_v209/v209_prx_decision_report.md": {
+      "bytes": 3038,
+      "sha256": "dc7c480d2d62911fa668b4be7b58756b2884492905e199206fb2c1d12f80728f"
+    },
+    "evidence/c2c12_v209/v209_prx_density_strata.csv": {
+      "bytes": 1194,
+      "sha256": "484892bf126d9e5ea7fa8c5286e99e98683156192a138ba32a343a1693b688ea"
+    },
+    "evidence/c2c12_v209/v209_prx_experiment_gains.csv": {
+      "bytes": 1788,
+      "sha256": "0dc7ea4b99fbf018fa207a5d5197a3b0f38adedbc57750aedacfd3b0dfc87b57"
+    },
+    "evidence/c2c12_v209/v209_prx_free_vs_equivariant.csv": {
+      "bytes": 1009,
+      "sha256": "f7114a853449b659dd3827865ce936bbb50a7018e483cc2389c91951a0c03235"
+    },
+    "evidence/c2c12_v209/v209_prx_main_metrics.csv": {
+      "bytes": 9409,
+      "sha256": "0abb24b3ee91019fc298685c221e900c388712927d110f9082d50797faf6e0b7"
+    },
+    "evidence/c2c12_v209/v209_prx_manifest.json": {
+      "bytes": 2293,
+      "sha256": "38a97580b0e9d83fbf15ffc7462edceb022f00a6d0e0887c9cc3e810ad72b3f3"
+    },
+    "evidence/c2c12_v209/v209_prx_operator_coefficients.csv": {
+      "bytes": 1355,
+      "sha256": "e174aac0798c99df7713ab04f5d333c8aca0013f163f51bb621bfb35560cc6c3"
+    },
+    "evidence/c2c12_v209/v209_prx_operator_scale_norms.csv": {
+      "bytes": 223,
+      "sha256": "c9e062e3c4f000ec7490a56656d2808316663508a6b761f3af35c4ae54ce98db"
+    },
+    "evidence/c2c12_v209/v209_prx_tracking_quality.csv": {
+      "bytes": 694,
+      "sha256": "9a2b618bd7f3b5ce23e3cd6681cabf8f9ad1619d04bbeb4426ce9ce0f57e2123"
     },
     "evidence/comparators/comparator_protocol_matrix.csv": {
       "bytes": 1982,
@@ -485,6 +529,14 @@
       "bytes": 2711,
       "sha256": "21c298cd4c4310018b6b0d48e84646c3889d85886b74dda4b86ee615eaa571da"
     },
+    "experiments/publication/run_c2c12_lit_cell_external_confirmation_v209.py": {
+      "bytes": 80208,
+      "sha256": "8334d0e13303f99f98f2fc18eba49170f91812e23de3eb46b84f24e4453fbc34"
+    },
+    "experiments/publication/run_c2c12_reliability_transport_v168.py": {
+      "bytes": 62857,
+      "sha256": "52de1aa6f0a53d00f23ca9d4604db469816adc9e92b81dd6aa8a2890f6888340"
+    },
     "experiments/publication/run_deepsea_completed_innovation_transport_v204.py": {
       "bytes": 20439,
       "sha256": "7525ab1d930a44f2cc3b654911f79e24aa5bb2cc0bbeeff4b958ab937abdf879"
@@ -906,16 +958,20 @@
       "sha256": "f046d05198c8a0b2247d637c22d7de091eab8ef88c0b45b4e9850b49e510e3fe"
     },
     "scripts/run_sequential_cell_forecasting.py": {
-      "bytes": 2792,
-      "sha256": "c778cc1a67c95198d1ed05857abc64a9508372eed623b057109137ed754fa837"
+      "bytes": 2866,
+      "sha256": "95331a1a95aa2f125202099b5a554031a828ca270ac278b4a7c3936106635a5e"
+    },
+    "scripts/summarize_c2c12_lit_cell_external_v209.py": {
+      "bytes": 17887,
+      "sha256": "903ba7a2eaa40fdf9aebc20a0e6d20e62fb8de7c9efd2ae86f9f0296c4a5f0ab"
     },
     "scripts/validate_lachance_tables.py": {
       "bytes": 1953,
       "sha256": "9ab09b1d1f8304b634705d89f7d917f0519b597109fdae373eedb9db97956ebd"
     },
     "scripts/validate_publication_release.py": {
-      "bytes": 15040,
-      "sha256": "47e3b6beb259d86d21362089c32f1b454612d2b1237a5ebb25757d96bb941eaf"
+      "bytes": 18708,
+      "sha256": "b4a58ad10081cd5c423c98bec19603e9cbb5ea3dc53e1cf9be7ec0fb2cfee648"
     },
     "src/lit_cell_forecasting/__init__.py": {
       "bytes": 659,
@@ -960,6 +1016,10 @@
     "src/lit_cell_forecasting/student_t_prior.py": {
       "bytes": 970,
       "sha256": "e5622b0ffbff5563961140ed0ce4c9a1994ddb894d648783dda4e0365a94c6fd"
+    },
+    "tests/test_c2c12_v209.py": {
+      "bytes": 4256,
+      "sha256": "6144435f83c7f51ad280e5f89ac27f4cdb88d4ba915fcbbeb094b38f9028c1ef"
     },
     "tests/test_operators.py": {
       "bytes": 2849,

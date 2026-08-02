@@ -34,6 +34,7 @@ WORKFLOWS = {
     "lifeact-segmentation": "run_lifeact_mdck_segmentation_identity_gate_v206.py",
     "lifeact-state": "run_lifeact_mdck_mechanochemical_state_gate_v207.py",
     "lifeact-uncertainty": "evaluate_lifeact_mdck_state_uncertainty_gate_v208.py",
+    "c2c12-external": "run_c2c12_lit_cell_external_confirmation_v209.py",
 }
 
 

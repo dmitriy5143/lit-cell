@@ -31,11 +31,18 @@ protocol frozen in the evidence contract.
 | HUVEC | nested movie exclusion | - | 1.440 px | 0.973 | 11.02% h6 gain, 18/18 movies |
 | MDCK Edge | frozen transport kernel | - | 5.261 px | 0.952 | 14.71% h6 gain, 3/3 seeds |
 | MDA-MB-231 | nested movie exclusion | - | 31.337 px | 0.024 | 6.33% h6 gain, 17/17 movies |
+| C2C12 automatic tracks | experiment-level structural transfer | 4.355 px | 5.088 px | 0.707 | 1.22% h6 gain, 3/3 experiments |
 
-The method has the lowest h6 RMSE among the completed, protocol-matched
-comparators in this study. We do **not** claim a global state of the art across
-trajectory-forecasting tasks: no established benchmark uses the same cell data,
-online observation schedule, split unit, and metric.
+On the LaChance protocol, the method has the lowest h6 RMSE among the completed,
+protocol-matched comparators in this study. We do **not** claim a global state
+of the art across trajectory-forecasting tasks: no established benchmark uses
+the same cell data, online observation schedule, split unit, and metric.
+
+The C2C12 row validates transfer of the completed-innovation mechanism rather
+than absolute benchmark dominance. Constant velocity remains stronger there at
+h6 (`4.860 px`), consistent with endpoint cancellation in noisy automatic
+centroids; the full real update nevertheless beats no-update, own-only,
+wrong-cell, and stale-time controls.
 
 ## Repository Map
 
@@ -101,7 +108,8 @@ frozen, and exploratory evidence are documented in
 
 The strongest supported conclusion is that recently completed residual motion
 contains a causal, spatially local, identity-specific signal that improves
-cumulative online cell-motion forecasts. The effective field admits a compact
+cumulative online cell-motion forecasts and transfers structurally to C2C12
+under experiment-level exclusion. The effective field admits a compact
 E(2)-equivariant and approximately dissipative representation, but the fitted
 functional is not identified as physical energy, traction, or stress. Visual,
 segmentation, and direct mechanics branches were retained only when they passed
