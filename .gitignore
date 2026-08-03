@@ -10,6 +10,7 @@ new_data/
 *.pt
 *.pth
 *.ckpt
+!models/**/*.pt
 *.log
 /tmp/
 /output/pdf/main_ru.*

@@ -17,6 +17,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "evidence"
+FROZEN_MODEL = ROOT / "models" / "lit_cell_mdck_bulk_primary"
 REPORT = EVIDENCE / "publication_release_validation.json"
 HOST_PATH_PATTERNS = (
     re.compile(r"/Users/[^/\s,]+/(?:Desktop|Documents|Downloads)/"),
@@ -73,6 +74,43 @@ def validate_portability(checks: list[str]) -> None:
         + (f": {', '.join(offenders)}" if offenders else ""),
         checks,
     )
+
+
+def validate_frozen_model_files(checks: list[str]) -> None:
+    manifest_path = FROZEN_MODEL / "manifest.json"
+    require(manifest_path.is_file(), "frozen primary model manifest exists", checks)
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    require(
+        payload.get("schema") == "lit_cell_frozen_fold_release_v1",
+        "frozen primary model schema is registered",
+        checks,
+    )
+    require(payload.get("checkpoint_count") == 18, "frozen release contains 18 states", checks)
+    entries = payload.get("checkpoints", [])
+    expected = {(movie, seed) for movie in range(1, 7) for seed in (7, 42, 123)}
+    actual = {(int(row["test_movie"]), int(row["seed"])) for row in entries}
+    require(actual == expected, "frozen states cover all six movies and three seeds", checks)
+    require(
+        close(payload["operating_points"]["h6_utility"]["h6_component_rmse_px"], 5.500748634593833),
+        "frozen model manifest registers the publication h6 operating point",
+        checks,
+    )
+    for entry in entries:
+        for path_key, hash_key, label in (
+            ("path", "sha256", "checkpoint"),
+            ("run_config", "run_config_sha256", "run config"),
+            ("model_metadata", "model_metadata_sha256", "model metadata"),
+        ):
+            relative = entry[path_key]
+            artifact = FROZEN_MODEL / relative
+            require(artifact.is_file(), f"frozen {label} exists: {relative}", checks)
+            digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
+            require(digest == entry[hash_key], f"frozen {label} hash matches: {relative}", checks)
+    for relative, expected_hash in payload.get("contract_files", {}).items():
+        artifact = FROZEN_MODEL / relative
+        require(artifact.is_file(), f"frozen transport contract exists: {relative}", checks)
+        digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
+        require(digest == expected_hash, f"frozen transport contract hash matches: {relative}", checks)
 
 
 def validate_article_numeric_audit(checks: list[str]) -> None:
@@ -441,6 +479,7 @@ def main() -> None:
     checks: list[str] = []
     if not args.skip_manifest:
         validate_manifest(checks)
+    validate_frozen_model_files(checks)
     validate_portability(checks)
     validate_article_numeric_audit(checks)
     validate_primary(checks)

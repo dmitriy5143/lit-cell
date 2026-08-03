@@ -1,0 +1,2 @@
+variant,best_epoch,best_val_score_eta1,best_val_score_tuned,eta,parameters,degrees_of_freedom,device,use_context,track_only,use_update,use_graph,output_mode,target_mean,target_scale,graph_strength
+v97_direct,21,3.2932934379577636,3.2912979507446294,0.75,380553,3.915647029876709,mps,False,False,True,False,direct,"[0.6830243468284607, 0.22518885135650635]","[5.401308059692383, 5.013378620147705]",0.0

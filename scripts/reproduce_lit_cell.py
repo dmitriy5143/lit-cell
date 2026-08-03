@@ -238,6 +238,7 @@ def full(args: argparse.Namespace) -> None:
 def verify(_: argparse.Namespace) -> None:
     commands = [
         [sys.executable, "scripts/validate_publication_release.py"],
+        [sys.executable, "scripts/validate_frozen_model_release.py"],
         [sys.executable, "-m", "compileall", "-q", "src", "experiments", "scripts"],
         [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
     ]

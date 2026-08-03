@@ -1,0 +1,57 @@
+{
+  "alphas": "1,10,30,100,300,1000,3000,10000",
+  "bounds_px": "0.5,1,1.5,2,3,4,6",
+  "constant_velocity_source": "${AIRI_ROOT}/outputs/lachance_online_lomo_benchmark_v102_v97_production_2026-07-21/v102_movie_level_summary.csv",
+  "control_seed": 157008,
+  "device": "mps",
+  "local_scales_px": "30,60,120,240",
+  "movies": "1,2,3,4,5,6",
+  "objectives": {
+    "balanced_guard2": {
+      "status": "exploratory",
+      "validation_h1_guard_percent": 2.0,
+      "weights": {
+        "1": 0.45,
+        "2": 0.15,
+        "4": 0.15,
+        "6": 0.25
+      }
+    },
+    "h1_strict": {
+      "status": "confirmatory",
+      "validation_h1_guard_percent": 0.5,
+      "weights": {
+        "1": 0.8,
+        "2": 0.1,
+        "4": 0.06,
+        "6": 0.04
+      }
+    },
+    "h6_guard10": {
+      "status": "exploratory",
+      "validation_h1_guard_percent": 10.0,
+      "weights": {
+        "1": 0.1,
+        "2": 0.1,
+        "4": 0.2,
+        "6": 0.6
+      }
+    },
+    "trajectory_guard5": {
+      "status": "exploratory",
+      "validation_h1_guard_percent": 5.0,
+      "weights": {
+        "1": 0.25,
+        "2": 0.15,
+        "4": 0.2,
+        "6": 0.4
+      }
+    }
+  },
+  "out_dir": "${AIRI_ROOT}/outputs/lachance_foldlocal_semigroup_pareto_v157h_full_2026-07-24",
+  "protocol": "strict fold-local streaming/receding h1",
+  "seeds": "7,42,123",
+  "source_sha256": "4cfa7f97ac77b502f78e281423edd5b249c9a82ca7d1a6ea0854d6b79fabdbe6",
+  "v102_root": "${AIRI_ROOT}/outputs/lachance_online_lomo_benchmark_v102_v97_production_2026-07-21",
+  "v102_summary": "${AIRI_ROOT}/outputs/lachance_online_lomo_benchmark_v102_v97_production_2026-07-21/v102_movie_level_summary.csv"
+}

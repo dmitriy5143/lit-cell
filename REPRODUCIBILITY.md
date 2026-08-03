@@ -229,6 +229,31 @@ package and verify checkpoint round-tripping:
 python scripts/reproduce_lit_cell.py smoke
 ```
 
+## Frozen Primary States
+
+The repository contains all 18 recurrent checkpoints used by the primary MDCK
+Bulk outer-movie evaluation under `models/lit_cell_mdck_bulk_primary/`. Validate
+their file hashes, tensor hashes, fold/seed coverage, and strict model loading:
+
+```bash
+python scripts/validate_frozen_model_release.py
+```
+
+Load a particular held-out-movie state after installing the package:
+
+```python
+from lit_cell_forecasting import load_frozen_fold_state
+
+frozen = load_frozen_fold_state(test_movie=1, seed=42)
+model = frozen.model
+```
+
+These files preserve the trained neural states. The full LIT-Cell result also
+contains a fold-local coordinate anchor and bounded transport fit. Those are
+deterministically rebuilt by the `full` workflow below from the documented raw
+tables and feature grid; the generated approximately 2 GB cache is deliberately
+not versioned.
+
 This command uses synthetic observations solely to check event ordering,
 identity state, uncertainty outputs, graph execution, and serialization.
 

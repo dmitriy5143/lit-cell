@@ -52,8 +52,12 @@ wrong-cell, and stale-time controls.
   closure. Historical numeric suffixes are mapped to scientific roles in
   `docs/EXPERIMENTS.md`.
 - `experiments/history/`: index of rejected or diagnostic architecture branches.
+- `models/lit_cell_mdck_bulk_primary/`: all 18 frozen neural states for the
+  registered six-movie, three-seed MDCK Bulk evaluation, plus the h1/h6
+  transport contract and a machine-readable manifest.
 - `evidence/`: frozen result tables, protocol contracts, control outcomes, and
-  claim-scope ledgers. Raw microscopy data and checkpoints are not committed.
+  claim-scope ledgers. Raw microscopy and generated multi-gigabyte caches are
+  not committed.
 - `scripts/run_sequential_cell_forecasting.py`: descriptive dispatcher for the
   principal publication workflows.
 - `scripts/prepare_lit_cell_features.py`: frozen raw-microscopy-to-feature-grid
@@ -75,6 +79,7 @@ Validate the frozen evidence and registered claims without the raw data:
 
 ```bash
 python scripts/validate_publication_release.py
+python scripts/validate_frozen_model_release.py
 ```
 
 Compile all experiment entry points:
@@ -95,6 +100,21 @@ Run the architecture-level end-to-end smoke replay:
 ```bash
 python scripts/reproduce_lit_cell.py smoke
 ```
+
+Load a frozen primary fold state directly from the clone:
+
+```python
+from lit_cell_forecasting import load_frozen_fold_state
+
+frozen = load_frozen_fold_state(test_movie=1, seed=42)
+model = frozen.model
+```
+
+The publication result is an outer-movie procedure rather than a single model
+trained on all six test movies. Consequently the repository stores the complete
+`6 folds x 3 seeds` state grid. The fold-local coordinate anchor and transport
+are rebuilt by the exact full-data runner; their generated 2 GB cache is not a
+source artifact.
 
 The canonical naming contract is recorded in
 [`docs/NAMING.md`](docs/NAMING.md). Exact full-data preflight and reproduction
